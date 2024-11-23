@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\V1\Controller;
+use App\Http\Requests\MovieStoreRequest;
+use App\Http\Requests\MovieUpdateRequest;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
-class ApiV1MovieController extends Controller
+class MovieController extends Controller
 {
     /**
      * Display a listing of the resource.
