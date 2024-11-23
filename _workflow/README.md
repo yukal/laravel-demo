@@ -60,6 +60,12 @@
 ```bash
 # Use rollback if need
 ./artisan migrate:rollback
+
+# clear cached routes
+./artisan route:clear
+
+# clear cached views
+./artisan view:clear
 ```
 
 ## Run
