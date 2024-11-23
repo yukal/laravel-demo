@@ -28,7 +28,8 @@ class MovieController extends Controller
      */
     public function create(): View
     {
-        return view('movies.create');
+        $statuses = Movie::getStatuses();
+        return view('movies.create', compact('statuses'));
     }
 
     /**
@@ -55,7 +56,8 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie): View
     {
-        return view('movies.edit', compact('movie'));
+        $statuses = Movie::getStatuses();
+        return view('movies.edit', compact('movie', 'statuses'));
     }
 
     /**

@@ -18,6 +18,7 @@
                 <tr>
                     <th width="80px">No</th>
                     <th>Name</th>
+                    <th>Status</th>
                     <th width="250px">Action</th>
                 </tr>
             </thead>
@@ -27,6 +28,7 @@
                     <tr>
                         <td>{{ ++$i }}</td>
                         <td>{{ $movie->name }}</td>
+                        <td>{{ $movie->status }}</td>
                         <td>
                             <form action="{{ route('movies.destroy',$movie->id) }}" method="POST">
                                 <a class="btn btn-info btn-sm" href="{{ route('movies.show',$movie->id) }}"><i class="fa-solid fa-list"></i> Show</a>

@@ -32,15 +32,18 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 col-sm-6 col-md-4">
                 <label for="inputStatus" class="form-label">
                     <strong>Status:</strong>
                 </label>
 
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="status" id="inputStatus"
-                        class="form-control @error('status') is-invalid @enderror" />
-                    <label class="form-check-label" for="inputStatus">show</label>
+                <div class="form-floating">
+                    <select class="form-select @error('status') is-invalid @enderror" id="inputStatus" name="status" aria-label="status">
+                        @foreach($statuses as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                        @endforeach
+                    </select>
+                    <label for="inputStatus">Status</label>
                 </div>
 
                 @error('status')

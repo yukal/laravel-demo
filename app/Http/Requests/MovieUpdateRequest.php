@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Movie;
 
 class MovieUpdateRequest extends FormRequest
 {
@@ -24,9 +25,10 @@ class MovieUpdateRequest extends FormRequest
         return [
             'name' => 'required|string|max:80',
             'link' => 'required|string|max:160',
-            'status' => 'in:1',
-            // 'status' => 'integer|min:0|max:1',
-            // 'status' => 'boolean',
+            'status' => [
+                'integer',
+                'in:' . implode(',', array_keys(Movie::getStatuses()))
+            ],
         ];
     }
 }
