@@ -42,7 +42,7 @@
                     <input type="checkbox" class="form-check-input" name="status" id="inputStatus"
                         class="form-control @error('status') is-invalid @enderror"
                         @checked(old('status', $movie->status)) />
-                    <label class="form-check-label" for="inputStatus">show</label>
+                    <label class="form-check-label" for="inputStatus">publish</label>
                 </div>
 
                 @error('status')
