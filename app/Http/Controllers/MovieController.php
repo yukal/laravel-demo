@@ -63,7 +63,6 @@ class MovieController extends Controller
      */
     public function update(MovieUpdateRequest $request, Movie $movie): RedirectResponse
     {
-        // var_dump($request->_POST);
         $movie->update($request->validated());
 
         return redirect()->route('movies.index')

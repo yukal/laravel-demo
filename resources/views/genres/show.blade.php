@@ -23,7 +23,6 @@
 
                     <tbody>
                         @forelse ($genre->movies as $genre)
-                            @if($genre->status == 0)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td><a href="{{ $genre->link }}">{{ $genre->name }}</a></td>
@@ -37,7 +36,6 @@
                                     </form>
                                 </td>
                             </tr>
-                            @endif
                         @empty
                             <tr>
                                 <td colspan="4">There are no data.</td>
