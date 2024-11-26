@@ -24,7 +24,8 @@ class MovieUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:80',
-            'link' => 'required|string|max:160',
+            'genres' => 'required|array',
+            'image' => 'mimes:jpeg,jpg,png,gif|max:2048',
             'status' => [
                 'integer',
                 'in:' . implode(',', array_keys(Movie::getStatuses()))

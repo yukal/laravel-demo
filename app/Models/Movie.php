@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Collection;
 
 class Movie extends Model
 {
@@ -23,6 +24,16 @@ class Movie extends Model
         return $this->belongsToMany(Genre::class, 'genres_movies');
     }
 
+    public function mappedGenres(Collection $genres) {
+        $data = [];
+
+        foreach ($this->genres as $genre) {
+            $data[$genre->id] = $genre->name;
+        }
+
+        return $data;
+    }
+
     public static function getStatuses(): array
     {
         return [
@@ -38,5 +49,16 @@ class Movie extends Model
             self::PUBLISHED => 'published',
             default => 'unknown',
         };
+    }
+
+    public function getGenresNamesAttribute(): string
+    {
+        $genresNames = [];
+
+        foreach ($this->genres as $genre) {
+            $genresNames[] = $genre->name;
+        }
+
+        return implode(', ', $genresNames);
     }
 }

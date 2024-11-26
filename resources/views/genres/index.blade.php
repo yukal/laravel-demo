@@ -26,10 +26,9 @@
                 @forelse ($genres as $genre)
                     <tr>
                         <td>{{ ++$i }}</td>
-                        <td>{{ $genre->name }}</td>
+                        <td><a href="{{ route('genres.show',$genre->id) }}">{{ $genre->name }}</a></td>
                         <td>
                             <form action="{{ route('genres.destroy',$genre->id) }}" method="POST">
-                                <a class="btn btn-info btn-sm" href="{{ route('genres.show',$genre->id) }}"><i class="fa-solid fa-list"></i> Show</a>
                                 <a class="btn btn-primary btn-sm" href="{{ route('genres.edit',$genre->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                 @csrf
                                 @method('DELETE')
@@ -46,6 +45,6 @@
         </table>
 
     </div>
-</div>  
+</div>
 
 @endsection

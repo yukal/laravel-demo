@@ -9,7 +9,7 @@
             <a class="btn btn-primary btn-sm" href="{{ route('movies.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
         </div>
 
-        <form action="{{ route('movies.store') }}" method="POST">
+        <form action="{{ route('movies.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
@@ -23,35 +23,33 @@
             </div>
 
             <div class="mb-3">
-                <label for="inputLink" class="form-label"><strong>Link:</strong></label>
-                <input type="text" id="inputLink" placeholder="Link"
-                    name="link" 
-                    class="form-control @error('link') is-invalid @enderror">
-                @error('link')
+                <label for="inputImage" class="form-label"><strong>Image:</strong></label>
+                <input type="file" id="inputImage" name="image"
+                    class="form-control @error('image') is-invalid @enderror">
+                @error('image')
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
-            <div class="mb-3 col-sm-6 col-md-4">
-                <label for="inputStatus" class="form-label">
-                    <strong>Status:</strong>
+            <div class="mb-3">
+                <label for="inputGenre" class="form-label @error('genre') is-invalid @enderror">
+                    <strong>Genre:</strong>
                 </label>
 
-                <div class="form-floating">
-                    <select class="form-select @error('status') is-invalid @enderror" id="inputStatus" name="status" aria-label="status">
-                        @foreach($statuses as $value => $label)
-                            <option value="{{ $value }}">{{ $label }}</option>
-                        @endforeach
-                    </select>
-                    <label for="inputStatus">Status</label>
+                <br>
+
+                <div class="btn-group @error('genre') is-invalid @enderror" role="group" aria-label="Genres">
+                @foreach($genres as $genre)
+                    <input type="checkbox" class="btn-check" id="btn-genre-{{$loop->iteration}}" name="genres[]" value="{{ $genre->id }}" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btn-genre-{{$loop->iteration}}">{{ $genre->name }}</label>
+                @endforeach
                 </div>
 
-                @error('status')
+                @error('genres')
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
-            <br>
             <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
         </form>
 

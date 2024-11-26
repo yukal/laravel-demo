@@ -23,8 +23,8 @@ class MovieStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:80',
-            'link' => 'required|string|max:160',
-            'status' => 'integer|min:0|max:1',
+            'genres' => 'required|array',
+            'image' => 'mimes:jpeg,jpg,png,gif|max:2048',
         ];
     }
 }

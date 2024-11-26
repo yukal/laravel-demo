@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 use App\Models\Movie;
+use App\Models\Genre;
 use App\Http\Requests\MovieStoreRequest;
 use App\Http\Requests\MovieUpdateRequest;
 
@@ -28,8 +30,8 @@ class MovieController extends Controller
      */
     public function create(): View
     {
-        $statuses = Movie::getStatuses();
-        return view('movies.create', compact('statuses'));
+        $genres = Genre::All();
+        return view('movies.create', compact('genres'));
     }
 
     /**
@@ -37,7 +39,15 @@ class MovieController extends Controller
      */
     public function store(MovieStoreRequest $request): RedirectResponse
     {
-        Movie::create($request->validated());
+        $fields = $request->validated();
+
+        if (isset($fields['image'])) {
+            // $fields['link'] = $request->image->storePublicly('movies', 'local');
+            $fields['link'] = $request->image->storePublicly('movies', 'public');
+        }
+
+        $movie = Movie::create($fields);
+        $movie->genres()->sync($fields['genres']);
 
         return redirect()->route('movies.index')
             ->with('success', 'Movie created successfully.');
@@ -56,8 +66,8 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie): View
     {
-        $statuses = Movie::getStatuses();
-        return view('movies.edit', compact('movie', 'statuses'));
+        $genres = Genre::All();
+        return view('movies.edit', compact('movie', 'genres'));
     }
 
     /**
@@ -65,7 +75,10 @@ class MovieController extends Controller
      */
     public function update(MovieUpdateRequest $request, Movie $movie): RedirectResponse
     {
-        $movie->update($request->validated());
+        $fields = $request->validated();
+
+        $movie->update($fields);
+        $movie->genres()->sync($fields['genres']);
 
         return redirect()->route('movies.index')
             ->with('success', 'Movie updated successfully');
@@ -76,6 +89,12 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie): RedirectResponse
     {
+        $fs = Storage::disk('public');
+
+        if ($fs->exists($movie->link)) {
+            $fs->delete($movie->link);
+        }
+
         $movie->delete();
 
         return redirect()->route('movies.index')

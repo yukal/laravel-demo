@@ -27,11 +27,10 @@
                 @forelse ($movies as $movie)
                     <tr>
                         <td>{{ ++$i }}</td>
-                        <td>{{ $movie->name }}</td>
+                        <td><a href="{{ route('movies.show', $movie->id) }}">{{ $movie->name }}</a></td>
                         <td>{{ $movie->status }}</td>
                         <td>
                             <form action="{{ route('movies.destroy',$movie->id) }}" method="POST">
-                                <a class="btn btn-info btn-sm" href="{{ route('movies.show',$movie->id) }}"><i class="fa-solid fa-list"></i> Show</a>
                                 <a class="btn btn-primary btn-sm" href="{{ route('movies.edit',$movie->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                 @csrf
                                 @method('DELETE')
@@ -48,6 +47,6 @@
         </table>
 
     </div>
-</div>  
+</div>
 
 @endsection
