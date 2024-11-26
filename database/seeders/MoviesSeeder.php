@@ -13,18 +13,22 @@ class MoviesSeeder extends Seeder
      */
     public function run(): void
     {
+        // http://www.impawards.com/intl/
+
         DB::table('movies')->insert([
             // 1. Action
             [
                 'id' => 1,
                 'name' => 'Gladiator',
-                'link' => 'https://www.imdb.com/title/tt0172495/',
+                'link' => 'movies/MWD8GDSMRxh48WUJmcxeB0RrWpbCnCd1rMLh9MUV.jpg',
+                // 'link' => 'https://www.imdb.com/title/tt0172495/',
                 'status' => true,
             ],
             [
                 'id' => 2,
                 'name' => 'Gladiator 2',
-                'link' => 'https://www.imdb.com/title/tt9218128/',
+                'link' => 'movies/RTl8MRqeFkwcAyswPRWMl2Gx94DnJYIcTGUqzGcP.jpg',
+                // 'link' => 'https://www.imdb.com/title/tt9218128/',
                 'status' => true,
             ],
 
@@ -32,7 +36,8 @@ class MoviesSeeder extends Seeder
             [
                 'id' => 3,
                 'name' => 'Killer Heat',
-                'link' => 'https://www.imdb.com/title/tt27419292/',
+                'link' => 'movies/CQM567zAiTZY7jaiT3LcSfbe5ZhhofM5IeEMkkEG.jpg',
+                // 'link' => 'https://www.imdb.com/title/tt27419292/',
                 'status' => true,
             ],
 
@@ -40,13 +45,15 @@ class MoviesSeeder extends Seeder
             [
                 'id' => 4,
                 'name' => 'Skin',
-                'link' => 'https://www.imdb.com/title/tt6043142/',
+                'link' => 'movies/gxGYfFakKkrBE0ztAKSQApojci2fJtVLMZVzDRI7.jpg',
+                // 'link' => 'https://www.imdb.com/title/tt6043142/',
                 'status' => true,
             ],
             [
                 'id' => 5,
                 'name' => 'Megalopolis',
-                'link' => 'https://www.imdb.com/title/tt10128846/',
+                'link' => 'movies/CgwXUf3ykeAw4yve0z3RZE8XrvSgxrCQTTILNtZC.jpg',
+                // 'link' => 'https://www.imdb.com/title/tt10128846/',
                 'status' => true,
             ],
 
@@ -54,13 +61,15 @@ class MoviesSeeder extends Seeder
             [
                 'id' => 6,
                 'name' => 'The Union',
-                'link' => 'https://www.imdb.com/title/tt12610390/',
+                'link' => 'movies/v0HSE478pCTqzykGmYtkBJ1Kx44KO4F1seJOZuO1.jpg',
+                // 'link' => 'https://www.imdb.com/title/tt12610390/',
                 'status' => true,
             ],
             [
                 'id' => 7,
                 'name' => 'Mr. Bean\'s Holiday',
-                'link' => 'https://www.imdb.com/title/tt0453451/',
+                'link' => 'movies/5RU97PKsIMsSsSPdIGEm28gOY3Lvtbvc6imCBEPW.jpg',
+                // 'link' => 'https://www.imdb.com/title/tt0453451/',
                 'status' => true,
             ],
 
@@ -68,19 +77,22 @@ class MoviesSeeder extends Seeder
             [
                 'id' => 8,
                 'name' => 'The Lake House',
-                'link' => 'https://www.imdb.com/title/tt0410297/',
+                'link' => 'movies/bJddXMu1YpyawZvtMQGN0bYuvFX9U0NEvtVRxxwc.png',
+                // 'link' => 'https://www.imdb.com/title/tt0410297/',
                 'status' => true,
             ],
             [
                 'id' => 9,
                 'name' => 'The Holiday',
-                'link' => 'https://www.imdb.com/title/tt0457939/',
+                'link' => 'movies/8o3srw3ItihWViprAG3OE7DOIA9j6ycS7xvLVprw.jpg',
+                // 'link' => 'https://www.imdb.com/title/tt0457939/',
                 'status' => true,
             ],
             [
                 'id' => 10,
                 'name' => 'The Best Christmas Pageant Ever',
-                'link' => 'https://www.imdb.com/title/tt2347285/',
+                'link' => 'movies/li1CGAFPcRnBdXfl0xt7Xcm86c8xYB3njDt5xK2B.jpg',
+                // 'link' => 'https://www.imdb.com/title/tt2347285/',
                 'status' => true,
             ],
 
@@ -88,13 +100,15 @@ class MoviesSeeder extends Seeder
             [
                 'id' => 11,
                 'name' => 'The Substance',
-                'link' => 'https://www.imdb.com/title/tt17526714/',
+                'link' => 'movies/Rj4jNQTm4coBrLEkmkoX0UvA3yRfqUuytkBrw8ML.jpg',
+                // 'link' => 'https://www.imdb.com/title/tt17526714/',
                 'status' => false,
             ],
             [
                 'id' => 12,
                 'name' => 'Alien: Romulus',
-                'link' => 'https://www.imdb.com/title/tt18412256/',
+                'link' => 'movies/eBZJpMaid9wQfBeDJwotfn0untZHkuOChyChBQNA.jpg',
+                // 'link' => 'https://www.imdb.com/title/tt18412256/',
                 'status' => true,
             ],
 
@@ -102,13 +116,15 @@ class MoviesSeeder extends Seeder
             [
                 'id' => 13,
                 'name' => 'The Magnificent Seven',
-                'link' => 'https://www.imdb.com/title/tt2404435/',
+                'link' => 'movies/ExDWsHaTcYM7bXdIT9nFSFo6mdkTHO25N1ah6BVL.jpg',
+                // 'link' => 'https://www.imdb.com/title/tt2404435/',
                 'status' => true,
             ],
             [
                 'id' => 14,
                 'name' => 'Pedro Paramo',
-                'link' => 'https://m.imdb.com/title/tt27717667/',
+                'link' => 'movies/77drZ0zwGSG3ZytZCYruAhmpX1vAch96p0Ad0BRP.jpg',
+                // 'link' => 'https://m.imdb.com/title/tt27717667/',
                 'status' => false,
             ],
         ]);
