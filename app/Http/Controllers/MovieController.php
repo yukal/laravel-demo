@@ -91,7 +91,7 @@ class MovieController extends Controller
     {
         $fs = Storage::disk('public');
 
-        if ($fs->exists($movie->link)) {
+        if (!is_null($movie->link) && $fs->exists($movie->link)) {
             $fs->delete($movie->link);
         }
 
