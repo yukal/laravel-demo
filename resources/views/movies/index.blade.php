@@ -34,14 +34,15 @@
                     <td><a href="{{ route('movies.show', $movie->id) }}">{{ $movie->name }}</a></td>
                     <td>{{ $movie->status }}</td>
                     <td>
-                        <form action="{{ route('movies.destroy', $movie->id) }}" method="POST">
-                            <a class="btn btn-primary btn-sm" href="{{ route('movies.edit', $movie->id) }}"><i
-                                    class="fa-solid fa-pen-to-square"></i> Edit</a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i>
-                                Delete</button>
-                        </form>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Action">
+                            <button type="button" class="btn btn-outline-primary" onclick="submitPublish({{ $movie->id }})">
+                                <i class="fa-solid fa-eye"></i> Publish</button>
+
+                            <a class="btn btn-outline-primary" href="{{ route('movies.edit', $movie->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+
+                            <button type="button" class="btn btn-outline-danger" onclick="submitDestroy({{ $movie->id }})">
+                                <i class="fa-solid fa-trash"></i> Delete</button>
+                        </div>
                     </td>
                 </tr>
             @empty
@@ -51,4 +52,29 @@
             @endforelse
         </tbody>
     </table>
+
+    <form name="form-publish" method="POST">
+        @csrf
+        @method('PATCH')
+        <input type="hidden" name="status" value="1" />
+    </form>
+
+    <form name="form-destroy" method="POST">
+        @csrf
+        @method('DELETE')
+    </form>
+
+    <script>
+        function submitPublish(movieID) {
+            var form = document.forms['form-publish'];
+            form.action = `{{ route('movies.publish', '') }}/${movieID}`;
+            form.submit();
+        }
+
+        function submitDestroy(movieID) {
+            var form = document.forms['form-destroy'];
+            form.action = `{{ route('movies.destroy', '') }}/${movieID}`;
+            form.submit();
+        }
+    </script>
 @endsection

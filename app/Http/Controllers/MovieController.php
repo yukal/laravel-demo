@@ -11,6 +11,7 @@ use App\Models\Movie;
 use App\Models\Genre;
 use App\Http\Requests\MovieStoreRequest;
 use App\Http\Requests\MovieUpdateRequest;
+use App\Http\Requests\MoviePublishRequest;
 
 class MovieController extends Controller
 {
@@ -27,7 +28,9 @@ class MovieController extends Controller
             $movies = Movie::where('status', 1)->get();
         }
 
-        return view('movies.index', compact('movies', 'isShowUnpublished'))
+        $statuses = Movie::getStatuses();
+
+        return view('movies.index', compact('movies', 'statuses', 'isShowUnpublished'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -55,7 +58,7 @@ class MovieController extends Controller
         $movie = Movie::create($fields);
         $movie->genres()->sync($fields['genres']);
 
-        return redirect()->route('movies.index')
+        return redirect()->route('movies.index', ['unpublished' => 1])
             ->with('success', 'Movie created successfully.');
     }
 
@@ -73,7 +76,9 @@ class MovieController extends Controller
     public function edit(Movie $movie): View
     {
         $genres = Genre::All();
-        return view('movies.edit', compact('movie', 'genres'));
+        $statuses = Movie::getStatuses();
+
+        return view('movies.edit', compact('movie', 'genres', 'statuses'));
     }
 
     /**
@@ -99,10 +104,24 @@ class MovieController extends Controller
         }
 
         $movie->update($fields);
-        $movie->genres()->sync($fields['genres']);
+
+        if (isset($fields['genres'])) {
+            $movie->genres()->sync($fields['genres']);
+        }
 
         return redirect()->route('movies.index')
             ->with('success', 'Movie updated successfully');
+    }
+
+    /**
+     * Publish movie.
+     */
+    public function publish(MoviePublishRequest $request, Movie $movie): RedirectResponse
+    {
+        $movie->update($request->validated());
+
+        return redirect()->route('movies.index')
+            ->with('success', 'Movie published successfully');
     }
 
     /**

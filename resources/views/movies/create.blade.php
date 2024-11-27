@@ -14,7 +14,7 @@
 
         <div class="form-group mb-3">
             <label for="inputName" class="form-label"><strong>Name:</strong></label>
-            <input type="text" id="inputName" placeholder="Name" name="name"
+            <input type="text" id="inputName" placeholder="Name" name="name" value="{{ old('name', '') }}"
                 class="form-control @error('name') is-invalid @enderror">
             @error('name')
                 <div class="form-text text-danger">{{ $message }}</div>

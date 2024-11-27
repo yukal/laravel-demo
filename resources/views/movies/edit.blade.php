@@ -36,10 +36,6 @@
                             <strong>ID:</strong> {{ $movie->id }}
                         </div>
 
-                        <div class="form-group">
-                            <strong>Status:</strong> {{ $movie->status }}
-                        </div>
-
                         <div class="form-group mt-3">
                             <label for="inputName" class="form-label"><strong>Name:</strong></label>
                             <input type="text" name="name" id="inputName" placeholder="Name"
@@ -55,6 +51,21 @@
                             <input type="file" id="inputImage" name="image"
                                 class="form-control @error('image') is-invalid @enderror">
                             @error('image')
+                                <div class="form-text text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mt-3 col-sm-6 col-md-4">
+                            <div class="form-floating">
+                                <select class="form-select @error('status') is-invalid @enderror" id="inputStatus" name="status" aria-label="status">
+                                    @foreach($statuses as $value => $label)
+                                        <option value="{{ $value }}" {{ $movie->status === $label ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="inputStatus">Status</label>
+                            </div>
+
+                            @error('status')
                                 <div class="form-text text-danger">{{ $message }}</div>
                             @enderror
                         </div>
