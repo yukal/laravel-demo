@@ -80,5 +80,6 @@
 ./artisan db:seed --class GenresMoviesSeeder
 
 # Serve
+./artisan storage:link
 ./artisan serve
 ```
