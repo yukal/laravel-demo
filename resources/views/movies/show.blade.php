@@ -15,7 +15,7 @@
 
         <div class="d-flex flex-row flex-wrap justify-content-between mb-3">
             <div class="p-2">
-                @if ($movie->link != '' && file_exists($publicPath.$movie->link))
+                @if ($movie->existImage)
                     <img class="rounded" width="300" src="{{ asset('storage/'.$movie->link) }}">
                 @else
                     <img class="rounded" width="300" src="{{ asset('storage/no-image-placeholder.svg') }}">

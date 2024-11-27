@@ -61,4 +61,12 @@ class Movie extends Model
 
         return implode(', ', $genresNames);
     }
+
+    public function getExistImageAttribute(): bool
+    {
+        $publicPath = public_path('storage/');
+
+        return (!is_null($this->link) || $this->link != '')
+            && file_exists($publicPath.$this->link);
+    }
 }
