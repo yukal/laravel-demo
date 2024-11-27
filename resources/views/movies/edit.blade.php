@@ -1,33 +1,34 @@
-@extends('movies.layout')
+@extends('layout')
+@section('title', 'Edit Movie')
+
+@section('menu')
+    <div class="collapse navbar-collapse" id="navbarContent">
+        @include('movies.menu')
+        <button type="button" class="btn btn-primary btn-sm" onclick="history.back()"><i class="fa fa-arrow-left"></i> Back</button>
+    </div>
+@endsection
+
 @section('content')
-@php
-    $publicPath = public_path('storage/');
+    @php
+        $publicPath = public_path('storage/');
 
-    $movieGenres = $movie->genres;
-    $mappedGenres = $movie->mappedGenres($movieGenres);
-@endphp
+        $movieGenres = $movie->genres;
+        $mappedGenres = $movie->mappedGenres($movieGenres);
+    @endphp
 
-<div class="card mt-5">
-    <h2 class="card-header">Edit Movie</h2>
-    <div class="card-body">
-
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a class="btn btn-primary btn-sm" href="{{ route('movies.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    <div class="d-flex flex-row flex-wrap justify-content-between">
+        <div class="p-2">
+            @if ($movie->existImage)
+                <img class="rounded" width="300" src="{{ asset('storage/' . $movie->link) }}">
+            @else
+                <img class="rounded" width="300" src="{{ asset('storage/no-image-placeholder.svg') }}">
+            @endif
         </div>
 
-        <div class="d-flex flex-row flex-wrap justify-content-between mb-3">
-            <div class="p-2">
-                @if ($movie->existImage)
-                    <img class="rounded" width="300" src="{{ asset('storage/'.$movie->link) }}">
-                @else
-                    <img class="rounded" width="300" src="{{ asset('storage/no-image-placeholder.svg') }}">
-                @endif
-            </div>
-
-            <div class="p-2 flex-grow-1">
-                <form action="{{ route('movies.update', $movie->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+        <div class="p-2 flex-grow-1">
+            <form action="{{ route('movies.update', $movie->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -63,12 +64,15 @@
                                 <strong>Genres:</strong>
                             </label>
 
-                            <div class="d-flex flex-row flex-wrap justify-content-start align-items-start @error('genre') is-invalid @enderror" role="group" aria-label="Genres">
-                            @foreach($genres as $genre)
-                                <input type="checkbox" class="btn-check" id="btn-genre-{{$loop->iteration}}" name="genres[]" value="{{ $genre->id }}" autocomplete="off"
-                                @if(isset($mappedGenres[$genre->id])) checked @endif>
-                                <label class="btn btn-outline-primary" for="btn-genre-{{$loop->iteration}}">{{ $genre->name }}</label>
-                            @endforeach
+                            <div class="d-flex flex-row flex-wrap justify-content-start align-items-start @error('genre') is-invalid @enderror"
+                                role="group" aria-label="Genres">
+                                @foreach ($genres as $genre)
+                                    <input type="checkbox" class="btn-check" id="btn-genre-{{ $loop->iteration }}"
+                                        name="genres[]" value="{{ $genre->id }}" autocomplete="off"
+                                        @if (isset($mappedGenres[$genre->id])) checked @endif>
+                                    <label class="btn btn-outline-primary btn-sm me-1 mb-1"
+                                        for="btn-genre-{{ $loop->iteration }}">{{ $genre->name }}</label>
+                                @endforeach
                             </div>
 
                             @error('genres')
@@ -82,10 +86,7 @@
                     </div>
                 </div>
 
-                </form>
-            </div>
+            </form>
         </div>
-
     </div>
-</div>
 @endsection

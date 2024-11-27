@@ -1,50 +1,47 @@
-@extends('genres.layout')
-@section('content')
+@extends('layout')
+@section('title', 'Genre: ' . $genre->name)
 
-<div class="card mt-5">
-    <h2 class="card-header">Genre: {{ $genre->name }}</h2>
-    <div class="card-body">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a class="btn btn-primary btn-sm" href="{{ route('genres.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                <strong>Genres:</strong>
-
-                <table class="table table-bordered table-striped mt-4">
-                    <thead>
-                        <tr>
-                            <th width="80px">No</th>
-                            <th>Name</th>
-                            <th width="250px">Action</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @forelse ($genre->movies as $movie)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td><a href="{{ route('movies.show', $movie->id) }}">{{ $movie->name }}</a></td>
-                                <td>
-                                    <form action="{{ route('genres.destroy', $genre->id) }}" method="POST">
-                                        <a class="btn btn-primary btn-sm" href="{{ route('movies.edit', $movie->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4">There are no data.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
+@section('menu')
+    <div class="collapse navbar-collapse" id="navbarContent">
+        @include('genres.menu')
+        <a class="btn btn-success btn-sm me-1" href="{{ route('genres.create') }}"><i class="fa fa-plus"></i> New Genre</a>
+        <button type="button" class="btn btn-primary btn-sm" onclick="history.back()"><i class="fa fa-arrow-left"></i> Back</button>
     </div>
-</div>
+@endsection
+
+@section('content')
+    <strong>Genres:</strong>
+
+    <table class="table table-bordered table-striped mt-2 mb-0">
+        <thead>
+            <tr>
+                <th width="80px">No</th>
+                <th>Name</th>
+                <th width="250px">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @forelse ($genre->movies as $movie)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td><a href="{{ route('movies.show', $movie->id) }}">{{ $movie->name }}</a></td>
+                    <td>
+                        <form action="{{ route('genres.destroy', $genre->id) }}" method="POST">
+                            <a class="btn btn-primary btn-sm" href="{{ route('movies.edit', $movie->id) }}"><i
+                                    class="fa-solid fa-pen-to-square"></i> Edit</a>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i>
+                                Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="4">There are no data.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
 @endsection
