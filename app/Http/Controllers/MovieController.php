@@ -17,11 +17,17 @@ class MovieController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $movies = Movie::all();
+        $isShowUnpublished = $request->query('unpublished', '0') == '1';
 
-        return view('movies.index', compact('movies'))
+        if ($isShowUnpublished) {
+            $movies = Movie::where('status', 0)->get();
+        } else {
+            $movies = Movie::where('status', 1)->get();
+        }
+
+        return view('movies.index', compact('movies', 'isShowUnpublished'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 

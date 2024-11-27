@@ -4,7 +4,15 @@
 @section('menu')
     <div class="collapse navbar-collapse" id="navbarContent">
         @include('movies.menu')
-        <a class="btn btn-success btn-sm" href="{{ route('movies.create') }}"><i class="fa fa-plus"></i> New Movie</a>
+        <a class="btn btn-success btn-sm me-1" href="{{ route('movies.create') }}"><i class="fa fa-plus"></i> New Movie</a>
+
+        @if ($isShowUnpublished)
+            <a class="btn btn-primary btn-sm" href="{{ route('movies.index') }}">
+                <i class="fa fa-eye"></i> Unpublished</a>
+        @else
+            <a class="btn btn-outline-primary btn-sm" href="{{ route('movies.index') . '?unpublished=1' }}">
+                <i class="fa fa-eye"></i> Unpublished</a>
+        @endif
     </div>
 @endsection
 
