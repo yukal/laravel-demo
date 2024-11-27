@@ -1,5 +1,9 @@
 @extends('movies.layout')
 @section('content')
+@php
+    $publicPath = public_path('storage/');
+@endphp
+
 
 <div class="card mt-5">
     <h2 class="card-header">Show Movie</h2>
@@ -11,7 +15,11 @@
 
         <div class="d-flex flex-row flex-wrap justify-content-between mb-3">
             <div class="p-2">
-                <img src="{{ asset('storage/'.$movie->link) }}" class="rounded" width="300">
+                @if ($movie->link != '' && file_exists($publicPath.$movie->link))
+                    <img class="rounded" width="300" src="{{ asset('storage/'.$movie->link) }}">
+                @else
+                    <img class="rounded" width="300" src="{{ asset('storage/no-image-placeholder.svg') }}">
+                @endif
             </div>
 
             <div class="p-2 flex-grow-1">
