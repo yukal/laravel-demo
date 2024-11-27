@@ -25,7 +25,7 @@
             </div>
 
             <div class="p-2 flex-grow-1">
-                <form action="{{ route('movies.update', $movie->id) }}" method="POST">
+                <form action="{{ route('movies.update', $movie->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -45,6 +45,15 @@
                                 value="{{ old('name', $movie->name) }}"
                                 class="form-control @error('name') is-invalid @enderror">
                             @error('name')
+                                <div class="form-text text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label for="inputImage" class="form-label"><strong>Image:</strong></label>
+                            <input type="file" id="inputImage" name="image"
+                                class="form-control @error('image') is-invalid @enderror">
+                            @error('image')
                                 <div class="form-text text-danger">{{ $message }}</div>
                             @enderror
                         </div>
