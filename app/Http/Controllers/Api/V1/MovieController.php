@@ -15,7 +15,8 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return Movie::all();
+        // return Movie::all();
+        return Movie::where('status', 1)->get();
     }
 
     /**
