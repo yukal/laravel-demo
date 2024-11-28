@@ -53,6 +53,8 @@
         </tbody>
     </table>
 
+    {{ $movies->links() }}
+
     <form name="form-publish" method="POST">
         @csrf
         @method('PATCH')

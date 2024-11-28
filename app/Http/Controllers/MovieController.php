@@ -23,15 +23,15 @@ class MovieController extends Controller
         $isShowUnpublished = $request->query('unpublished', '0') == '1';
 
         if ($isShowUnpublished) {
-            $movies = Movie::where('status', 0)->get();
+            $movies = Movie::where('status', 0)->paginate(10);
         } else {
-            $movies = Movie::where('status', 1)->get();
+            $movies = Movie::where('status', 1)->paginate(10);
         }
 
         $statuses = Movie::getStatuses();
 
         return view('movies.index', compact('movies', 'statuses', 'isShowUnpublished'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * $movies->perPage());
     }
 
     /**
