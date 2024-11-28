@@ -17,10 +17,10 @@ class GenreController extends Controller
      */
     public function index(): View
     {
-        $genres = Genre::all();
+        $genres = Genre::paginate(10);
 
         return view('genres.index', compact('genres'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * $genres->perPage());
     }
 
     /**

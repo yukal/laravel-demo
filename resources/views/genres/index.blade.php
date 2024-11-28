@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <table class="table table-bordered table-striped mb-0">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th width="80px">No</th>
@@ -41,4 +41,6 @@
             @endforelse
         </tbody>
     </table>
+
+    {{ $genres->links() }}
 @endsection

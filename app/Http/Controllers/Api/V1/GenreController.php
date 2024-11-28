@@ -15,7 +15,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-        return Genre::all();
+        return Genre::paginate(10);
     }
 
     /**
