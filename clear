@@ -1,0 +1,9 @@
+#!/bin/bash
+
+./artisan route:clear
+./artisan view:clear
+./artisan migrate:rollback
+./artisan migrate
+./artisan db:seed --class GenresSeeder
+./artisan db:seed --class MoviesSeeder
+./artisan db:seed --class GenresMoviesSeeder
