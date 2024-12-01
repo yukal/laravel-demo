@@ -66,6 +66,9 @@
 
 # clear cached views
 ./artisan view:clear
+
+# make available API
+./artisan install:api
 ```
 
 ## Run
