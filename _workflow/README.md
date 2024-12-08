@@ -1,88 +1,89 @@
-## Create Migration
+## First Init
+
+( ! ) Don't follow this part if you want to initialize clonned part.
+Follow these steps only when you plan to create application from scratch.
+I just leve this part here to demonstrate what the steps I encountered.
+
+See how [Install](https://laravel.com/docs/11.x#creating-a-laravel-project) PHP and the Laravel Installer before the init. Additional info about how to:
+- Creating the [Resource Controllers](https://laravel.com/docs/11.x/controllers#resource-controllers)
+- Supplementing the [Resource Controllers](https://laravel.com/docs/11.x/controllers#restful-supplementing-resource-controllers)
+- Specifying the [Resource Model](https://laravel.com/docs/11.x/controllers#specifying-the-resource-model)
+- Generating the [Form Requests](https://laravel.com/docs/11.x/controllers#generating-form-requests)
+- Creating the API [Resource Routes](https://laravel.com/docs/11.x/controllers#api-resource-routes)
 
 ```bash
-./artisan make:migration create_genres_table --create=genres
-./artisan make:migration create_movies_table --create=movies
-./artisan make:migration create_genres_movies_table --create=genres_movies
-```
+# install app
+laravel new app
 
-## Create Seeders
+# link public storage
+php artisan storage:link
 
-```bash
-./artisan make:seeder GenresSeeder
-./artisan make:seeder MoviesSeeder
-./artisan make:seeder GenresMoviesSeeder
-```
+# Create controllers, models, migrations, and seeders
+php artisan make:model Genre --migration --seed --controller --resource --requests
+php artisan make:model Movie --migration --seed --controller --resource --requests
 
-## Create Controllers & Models
+# Create pivot model
+php artisan make:model GenreMovie --migration --seed
 
-```bash
-./artisan make:controller GenreController --resource --model=Genre
-./artisan make:controller MovieController --resource --model=Movie
-```
+# Create request for publishing a movie
+php artisan make:request PublishMovieRequest
 
-## Create Requests
+# Rise up migrations
+php artisan migrate
 
-```bash
-./artisan make:request GenreStoreRequest
-./artisan make:request GenreUpdateRequest
-./artisan make:request MovieStoreRequest
-./artisan make:request MovieUpdateRequest
-```
+# Create Views: Genres
+php artisan make:view genres.index
+php artisan make:view genres.create
+php artisan make:view genres.edit
+php artisan make:view genres.show
 
-## Create Views
+# Create Views: Movies
+php artisan make:view movies.index
+php artisan make:view movies.create
+php artisan make:view movies.edit
+php artisan make:view movies.show
 
-```bash
-# Genres
-./artisan make:view genres.layout
-./artisan make:view genres.index
-./artisan make:view genres.create
-./artisan make:view genres.edit
-./artisan make:view genres.show
+# make API available
+php artisan install:api
 
-# Movies
-./artisan make:view movies.layout
-./artisan make:view movies.index
-./artisan make:view movies.create
-./artisan make:view movies.edit
-./artisan make:view movies.show
-```
+# Create controllers for the API
+php artisan make:controller Api\V1\GenreController
+php artisan make:controller Api\V1\MovieController
 
-## Create API Controllers
-
-```bash
-./artisan make:controller Api\V1\GenreController
-./artisan make:controller Api\V1\MovieController
+npm install
 ```
 
 ## Additional Info
 
 ```bash
 # Use rollback if need
-./artisan migrate:rollback
+php artisan migrate:rollback
 
 # clear cached routes
-./artisan route:clear
+php artisan route:clear
 
 # clear cached views
-./artisan view:clear
+php artisan view:clear
 
 # make available API
-./artisan install:api
+php artisan install:api
+```
+
+## Init <small>(for clonned project)</small>
+```bash
+# For unix systems start:
+./init
+
+# For windows systems start:
+init.cmd
 ```
 
 ## Run
 
 ```bash
-# Create Tables
-./artisan migrate
+php artisan serve
 
-# Fill in the DB
-./artisan db:seed --class GenresSeeder
-./artisan db:seed --class MoviesSeeder
-./artisan db:seed --class GenresMoviesSeeder
+# or
 
-# Serve
-./artisan storage:link
-./artisan serve
+composer run dev
 ```
