@@ -9,9 +9,9 @@ use Illuminate\View\View;
 
 use App\Models\Movie;
 use App\Models\Genre;
-use App\Http\Requests\MovieStoreRequest;
-use App\Http\Requests\MovieUpdateRequest;
-use App\Http\Requests\MoviePublishRequest;
+use App\Http\Requests\StoreMovieRequest;
+use App\Http\Requests\UpdateMovieRequest;
+use App\Http\Requests\PublishMovieRequest;
 
 class MovieController extends Controller
 {
@@ -46,7 +46,7 @@ class MovieController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(MovieStoreRequest $request): RedirectResponse
+    public function store(StoreMovieRequest $request): RedirectResponse
     {
         $fields = $request->validated();
 
@@ -84,7 +84,7 @@ class MovieController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(MovieUpdateRequest $request, Movie $movie): RedirectResponse
+    public function update(UpdateMovieRequest $request, Movie $movie): RedirectResponse
     {
         $fields = $request->validated();
 
@@ -116,7 +116,7 @@ class MovieController extends Controller
     /**
      * Publish movie.
      */
-    public function publish(MoviePublishRequest $request, Movie $movie): RedirectResponse
+    public function publish(PublishMovieRequest $request, Movie $movie): RedirectResponse
     {
         $movie->update($request->validated());
 

@@ -7,8 +7,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 use App\Models\Genre;
-use App\Http\Requests\GenreStoreRequest;
-use App\Http\Requests\GenreUpdateRequest;
+use App\Http\Requests\StoreGenreRequest;
+use App\Http\Requests\UpdateGenreRequest;
 
 class GenreController extends Controller
 {
@@ -34,7 +34,7 @@ class GenreController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(GenreStoreRequest $request): RedirectResponse
+    public function store(StoreGenreRequest $request): RedirectResponse
     {
         Genre::create($request->validated());
 
@@ -61,7 +61,7 @@ class GenreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(GenreUpdateRequest $request, Genre $genre): RedirectResponse
+    public function update(UpdateGenreRequest $request, Genre $genre): RedirectResponse
     {
         $genre->update($request->validated());
 

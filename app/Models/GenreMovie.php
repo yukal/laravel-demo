@@ -11,7 +11,7 @@ class GenreMovie extends Model
      *
      * @var string
      */
-    protected $table = 'genres_movies';
+    protected $table = 'genre_movie';
 
     protected $primaryKey = [
         'genre_id',

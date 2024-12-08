@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Movie;
 
-class GenreStoreRequest extends FormRequest
+class UpdateMovieRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +23,13 @@ class GenreStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:50',
+            'name' => 'required|string|max:80',
+            'genres' => 'required|array',
+            'image' => 'mimes:jpeg,jpg,png,gif|max:2048',
+            'status' => [
+                'integer',
+                'in:' . implode(',', array_keys(Movie::getStatuses()))
+            ],
         ];
     }
 }

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('genres_movies', function (Blueprint $table) {
+        Schema::create('genre_movie', function (Blueprint $table) {
             // $table->id();
-            $table->unsignedBigInteger('movie_id');
             $table->unsignedBigInteger('genre_id');
-            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
+            $table->unsignedBigInteger('movie_id');
             $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
+            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
             $table->primary(['genre_id', 'movie_id']);
             // $table->timestamps();
         });
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('genres_movies');
+        Schema::dropIfExists('genre_movie');
     }
 };

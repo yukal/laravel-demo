@@ -6,14 +6,14 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use DB;
 
-class GenresMoviesSeeder extends Seeder
+class GenreMovieSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('genres_movies')->insert([
+        DB::table('genre_movie')->insert([
             // 1. Action
             ['movie_id' => 1, 'genre_id' => 1],
             ['movie_id' => 2, 'genre_id' => 1],
