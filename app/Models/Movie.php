@@ -17,8 +17,8 @@ class Movie extends Model
     protected $hidden = ['pivot'];
     protected $fillable = [
         'name',
-        'link',
-        'status',
+        'poster',
+        'is_published',
     ];
 
     protected $appends = [
@@ -48,10 +48,10 @@ class Movie extends Model
         ];
     }
 
-    public function getGenresIDsAttribute(): array
+    public function getGenresMapAttribute(): array
     {
         return $this->genres()
-            ->pluck('id', 'id')
+            ->pluck('name', 'id')
             ->toArray();
     }
 
@@ -64,7 +64,7 @@ class Movie extends Model
 
     public function getStatusTextAttribute(): string
     {
-        return match ($this->status) {
+        return match ($this->is_published) {
             self::UNPUBLISHED => 'unpublished',
             self::PUBLISHED => 'published',
             default => 'unknown',
@@ -73,7 +73,7 @@ class Movie extends Model
 
     public function getExistImageAttribute(): bool
     {
-        return !empty($this->link) 
-            && Storage::disk('public')->exists($this->link);
+        return !empty($this->poster) 
+            && Storage::disk('public')->exists($this->poster);
     }
 }

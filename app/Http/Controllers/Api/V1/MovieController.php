@@ -16,7 +16,7 @@ class MovieController extends Controller
     public function index()
     {
         // return Movie::all();
-        return Movie::where('status', 1)->paginate(10);
+        return Movie::where('is_published', 1)->paginate(10);
     }
 
     /**

@@ -13,7 +13,7 @@
     <div class="d-flex flex-row flex-wrap justify-content-between">
         <div class="p-2">
             @if ($movie->existImage)
-                <img class="rounded" width="300" src="{{ asset('storage/' . $movie->link) }}">
+                <img class="rounded" width="300" src="{{ asset('storage/' . $movie->poster) }}">
             @else
                 <img class="rounded" width="300" src="{{ asset('storage/no-image-placeholder.svg') }}">
             @endif
@@ -41,7 +41,7 @@
                         </div>
 
                         <div class="form-group mt-3">
-                            <label for="inputImage" class="form-label"><strong>Image:</strong></label>
+                            <label for="inputImage" class="form-label"><strong>Poster:</strong></label>
                             <input type="file" id="inputImage" name="image"
                                 class="form-control @error('image') is-invalid @enderror">
                             @error('image')
@@ -51,30 +51,30 @@
 
                         <div class="form-group mt-3 col-sm-6 col-md-4">
                             <div class="form-floating">
-                                <select class="form-select @error('status') is-invalid @enderror" id="inputStatus" name="status" aria-label="status">
+                                <select class="form-select @error('is_published') is-invalid @enderror" id="inputStatus" name="is_published" aria-label="status">
                                     @foreach($statuses as $value => $label)
-                                        <option value="{{ $value }}" {{ $movie->status === 1 ? 'selected' : '' }}>{{ $label }}</option>
+                                        <option value="{{ $value }}" {{ $movie->is_published === 1 ? 'selected' : '' }}>{{ $label }}</option>
                                     @endforeach
                                 </select>
                                 <label for="inputStatus">Status</label>
                             </div>
 
-                            @error('status')
+                            @error('is_published')
                                 <div class="form-text text-danger">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="form-group mt-3">
-                            <label class="form-label @error('genre') is-invalid @enderror">
+                            <label class="form-label @error('genres') is-invalid @enderror">
                                 <strong>Genres:</strong>
                             </label>
 
-                            <div class="d-flex flex-row flex-wrap justify-content-start align-items-start @error('genre') is-invalid @enderror"
+                            <div class="d-flex flex-row flex-wrap justify-content-start align-items-start @error('genres') is-invalid @enderror"
                                 role="group" aria-label="Genres">
                                 @foreach ($genres as $genre)
                                     <input type="checkbox" class="btn-check" id="btn-genre-{{ $loop->iteration }}"
                                         name="genres[]" value="{{ $genre->id }}" autocomplete="off"
-                                        @if (isset($movie->genresIDs[$genre->id])) checked @endif>
+                                        @if (isset($movie->_genresMap[$genre->id])) checked @endif>
                                     <label class="btn btn-outline-primary btn-sm me-1 mb-1"
                                         for="btn-genre-{{ $loop->iteration }}">{{ $genre->name }}</label>
                                 @endforeach

@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
             $table->string('name', length: 80);
-            $table->string('link', length: 160)->nullable();
-            $table->smallInteger('status')->default(0);
-            // $table->boolean('status')->default(false);
+            $table->string('poster', length: 160)->nullable();
+            $table->smallInteger('is_published')->default(0);
+            // $table->boolean('is_published')->default(false);
             // $table->timestamps();
         });
     }

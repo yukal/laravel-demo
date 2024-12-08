@@ -23,9 +23,9 @@ class MovieController extends Controller
         $isShowUnpublished = $request->query('unpublished', '0') == '1';
 
         if ($isShowUnpublished) {
-            $movies = Movie::where('status', 0)->paginate(10);
+            $movies = Movie::where('is_published', 0)->paginate(10);
         } else {
-            $movies = Movie::where('status', 1)->paginate(10);
+            $movies = Movie::where('is_published', 1)->paginate(10);
         }
 
         $statuses = Movie::getStatuses();
@@ -51,8 +51,8 @@ class MovieController extends Controller
         $fields = $request->validated();
 
         if (isset($fields['image'])) {
-            // $fields['link'] = $request->image->storePublicly('movies', 'local');
-            $fields['link'] = $request->image->storePublicly('movies', 'public');
+            // $fields['poster'] = $request->image->storePublicly('movies', 'local');
+            $fields['poster'] = $request->image->storePublicly('movies', 'public');
         }
 
         $movie = Movie::create($fields);
@@ -67,6 +67,7 @@ class MovieController extends Controller
      */
     public function show(Movie $movie): View
     {
+        $movie->append(['statusText']);
         return view('movies.show', compact('movie'));
     }
 
@@ -77,11 +78,7 @@ class MovieController extends Controller
     {
         $genres = Genre::All();
         $statuses = Movie::getStatuses();
-
-        $movie->append([
-            'statusText',
-            'genresIDs', 
-        ]);
+        $movie->append(['_genresMap']);
 
         return view('movies.edit', compact('movie', 'genres', 'statuses'));
     }
@@ -95,10 +92,10 @@ class MovieController extends Controller
 
         if (isset($fields['image'])) {
             if ($movie->existImage) {
-                Storage::disk('public')->delete($movie->link);
+                Storage::disk('public')->delete($movie->poster);
             }
 
-            $fields['link'] = $request->image->storePublicly('movies', 'public');
+            $fields['poster'] = $request->image->storePublicly('movies', 'public');
         }
 
         $movie->update($fields);
@@ -129,8 +126,8 @@ class MovieController extends Controller
     {
         $fs = Storage::disk('public');
 
-        if (!empty($movie->link) && $fs->exists($movie->link)) {
-            $fs->delete($movie->link);
+        if (!empty($movie->poster) && $fs->exists($movie->poster)) {
+            $fs->delete($movie->poster);
         }
 
         $movie->delete();

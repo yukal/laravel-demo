@@ -14,7 +14,7 @@
     <div class="d-flex flex-row flex-wrap justify-content-between">
         <div class="p-2">
             @if ($movie->existImage)
-                <img class="rounded" width="300" src="{{ asset('storage/' . $movie->link) }}">
+                <img class="rounded" width="300" src="{{ asset('storage/' . $movie->poster) }}">
             @else
                 <img class="rounded" width="300" src="{{ asset('storage/no-image-placeholder.svg') }}">
             @endif
@@ -30,7 +30,7 @@
                         <strong>Name:</strong> {{ $movie->name }}
                     </div>
                     <!-- <div class="form-group">
-                        <strong>Link:</strong> {{ $movie->link }}
+                        <strong>Poster:</strong> {{ $movie->poster }}
                     </div> -->
                     <div class="form-group">
                         <strong>Status:</strong> {{ $movie->status_text }}

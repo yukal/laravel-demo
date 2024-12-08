@@ -35,13 +35,13 @@ class UpdateMovieRequest extends FormRequest
                 'list', 'min:1',
             ],
 
-            'poster' => [
+            'image' => [
                 'sometimes',
                 'required',
                 'image', 'mimes:jpeg,jpg,png,gif', 'max:2048',
             ],
 
-            'status' => [
+            'is_published' => [
                 'sometimes',
                 'numeric',
                 'in:' . implode(',', array_keys(Movie::getStatuses()))

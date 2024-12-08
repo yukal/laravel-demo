@@ -22,7 +22,7 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="inputImage" class="form-label"><strong>Image:</strong></label>
+            <label for="inputImage" class="form-label"><strong>Poster:</strong></label>
             <input type="file" id="inputImage" name="image" class="form-control @error('image') is-invalid @enderror">
             @error('image')
                 <div class="form-text text-danger">{{ $message }}</div>
@@ -30,11 +30,11 @@
         </div>
 
         <div class="form-group mb-3">
-            <label class="form-label @error('genre') is-invalid @enderror">
+            <label class="form-label @error('genres') is-invalid @enderror">
                 <strong>Genres:</strong>
             </label>
 
-            <div class="d-flex flex-row flex-wrap justify-content-start align-items-start @error('genre') is-invalid @enderror" role="group" aria-label="Genres">
+            <div class="d-flex flex-row flex-wrap justify-content-start align-items-start @error('genres') is-invalid @enderror" role="group" aria-label="Genres">
                 @foreach ($genres as $genre)
                     <input type="checkbox" class="btn-check" id="btn-genre-{{ $loop->iteration }}"
                         name="genres[]" value="{{ $genre->id }}" autocomplete="off"

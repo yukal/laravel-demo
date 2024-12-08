@@ -23,7 +23,7 @@ class PublishMovieRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => [
+            'is_published' => [
                 'integer',
                 'in:' . implode(',', array_keys(Movie::getStatuses()))
             ],

@@ -58,7 +58,7 @@
     <form name="form-publish" method="POST">
         @csrf
         @method('PATCH')
-        <input type="hidden" name="status" value="1" />
+        <input type="hidden" name="is_published" value="1" />
     </form>
 
     <form name="form-destroy" method="POST">
