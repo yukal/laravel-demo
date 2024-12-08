@@ -14,6 +14,7 @@ class Movie extends Model
     const UNPUBLISHED = 0;
     const PUBLISHED = 1;
 
+    protected $hidden = ['pivot'];
     protected $fillable = [
         'name',
         'link',

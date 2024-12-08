@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Genre extends Model
 {
+    protected $hidden = ['pivot'];
     protected $fillable = [
         'name',
     ];
