@@ -21,13 +21,6 @@ class Movie extends Model
         'is_published',
     ];
 
-    protected $appends = [
-        'status_text',
-        'exist_image',
-        'genres_names',
-        'genres_ids',
-    ];
-
     public $timestamps = false;
 
     /**
@@ -35,9 +28,7 @@ class Movie extends Model
      */
     public function genres(): BelongsToMany
     {
-        return $this->belongsToMany(Genre::class, 'genre_movie', 'movie_id', 'genre_id')
-            ->using(GenreMovie::class);
-            // ->withPivot(['genre_id', 'movie_id']);
+        return $this->belongsToMany(Genre::class, 'genre_movie', 'movie_id', 'genre_id');
     }
 
     public static function getStatuses(): array
