@@ -37,8 +37,7 @@
             <div class="d-flex flex-row flex-wrap justify-content-start align-items-start @error('genres') is-invalid @enderror" role="group" aria-label="Genres">
                 @foreach ($genres as $genre)
                     <input type="checkbox" class="btn-check" id="btn-genre-{{ $loop->iteration }}"
-                        name="genres[]" value="{{ $genre->id }}" autocomplete="off"
-                        @if (isset($mappedGenres[$genre->id])) checked @endif>
+                        name="genres[]" value="{{ $genre->id }}" autocomplete="off">
                     <label class="btn btn-outline-primary btn-sm me-1 mb-1"
                         for="btn-genre-{{ $loop->iteration }}">{{ $genre->name }}</label>
                 @endforeach
