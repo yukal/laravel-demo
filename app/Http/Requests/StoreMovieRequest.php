@@ -22,9 +22,9 @@ class StoreMovieRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:80',
-            'genres' => 'required|array',
-            'image' => 'mimes:jpeg,jpg,png,gif|max:2048',
+            'name' => ['required', 'string', 'ascii', 'min:3', 'max:80'],
+            'genres' => ['required', 'list', 'min:1'],
+            'poster' => ['nullable', 'image', 'mimes:jpeg,jpg,png,gif', 'max:2048'],
         ];
     }
 }
