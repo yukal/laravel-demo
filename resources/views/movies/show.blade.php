@@ -11,10 +11,6 @@
 @endsection
 
 @section('content')
-    @php
-        $publicPath = public_path('storage/');
-    @endphp
-
     <div class="d-flex flex-row flex-wrap justify-content-between">
         <div class="p-2">
             @if ($movie->existImage)
@@ -34,13 +30,13 @@
                         <strong>Name:</strong> {{ $movie->name }}
                     </div>
                     <!-- <div class="form-group">
-                                <strong>Link:</strong> {{ $movie->link }}
-                            </div> -->
+                        <strong>Link:</strong> {{ $movie->link }}
+                    </div> -->
                     <div class="form-group">
-                        <strong>Status:</strong> {{ $movie->status }}
+                        <strong>Status:</strong> {{ $movie->status_text }}
                     </div>
                     <div class="form-group">
-                        <strong>Genres:</strong> {{ $movie->genresNames }}
+                        <strong>Genres:</strong> {{ implode(', ', $movie->genres_names) }}
                     </div>
                 </div>
 

@@ -78,6 +78,11 @@ class MovieController extends Controller
         $genres = Genre::All();
         $statuses = Movie::getStatuses();
 
+        $movie->append([
+            'statusText',
+            'genresIDs', 
+        ]);
+
         return view('movies.edit', compact('movie', 'genres', 'statuses'));
     }
 

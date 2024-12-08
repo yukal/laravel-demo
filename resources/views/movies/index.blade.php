@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{ ++$i }}</td>
                     <td><a href="{{ route('movies.show', $movie->id) }}">{{ $movie->name }}</a></td>
-                    <td>{{ $movie->status }}</td>
+                    <td>{{ $movie->status_text }}</td>
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Action">
                             <button type="button" class="btn btn-outline-primary" onclick="submitPublish({{ $movie->id }})">

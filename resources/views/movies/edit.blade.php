@@ -9,12 +9,6 @@
 @endsection
 
 @section('content')
-    @php
-        $publicPath = public_path('storage/');
-
-        $movieGenres = $movie->genres;
-        $mappedGenres = $movie->mappedGenres($movieGenres);
-    @endphp
 
     <div class="d-flex flex-row flex-wrap justify-content-between">
         <div class="p-2">
@@ -59,7 +53,7 @@
                             <div class="form-floating">
                                 <select class="form-select @error('status') is-invalid @enderror" id="inputStatus" name="status" aria-label="status">
                                     @foreach($statuses as $value => $label)
-                                        <option value="{{ $value }}" {{ $movie->status === $label ? 'selected' : '' }}>{{ $label }}</option>
+                                        <option value="{{ $value }}" {{ $movie->status === 1 ? 'selected' : '' }}>{{ $label }}</option>
                                     @endforeach
                                 </select>
                                 <label for="inputStatus">Status</label>
@@ -80,7 +74,7 @@
                                 @foreach ($genres as $genre)
                                     <input type="checkbox" class="btn-check" id="btn-genre-{{ $loop->iteration }}"
                                         name="genres[]" value="{{ $genre->id }}" autocomplete="off"
-                                        @if (isset($mappedGenres[$genre->id])) checked @endif>
+                                        @if (isset($movie->genresIDs[$genre->id])) checked @endif>
                                     <label class="btn btn-outline-primary btn-sm me-1 mb-1"
                                         for="btn-genre-{{ $loop->iteration }}">{{ $genre->name }}</label>
                                 @endforeach

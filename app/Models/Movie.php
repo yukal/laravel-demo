@@ -7,7 +7,7 @@ use App\Models\GenreMovie;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class Movie extends Model
 {
@@ -19,6 +19,13 @@ class Movie extends Model
         'name',
         'link',
         'status',
+    ];
+
+    protected $appends = [
+        'status_text',
+        'exist_image',
+        'genres_names',
+        'genres_ids',
     ];
 
     public $timestamps = false;
@@ -41,24 +48,27 @@ class Movie extends Model
         ];
     }
 
-    public function getStatusAttribute($value)
+    public function getGenresIDsAttribute(): array
     {
-        return match ($value) {
+        return $this->genres()
+            ->pluck('id', 'id')
+            ->toArray();
+    }
+
+    public function getGenresNamesAttribute(): array
+    {
+        return $this->genres()
+            ->pluck('name')
+            ->toArray();
+    }
+
+    public function getStatusTextAttribute(): string
+    {
+        return match ($this->status) {
             self::UNPUBLISHED => 'unpublished',
             self::PUBLISHED => 'published',
             default => 'unknown',
         };
-    }
-
-    public function getGenresNamesAttribute(): string
-    {
-        $genresNames = [];
-
-        foreach ($this->genres as $genre) {
-            $genresNames[] = $genre->name;
-        }
-
-        return implode(', ', $genresNames);
     }
 
     public function getExistImageAttribute(): bool
