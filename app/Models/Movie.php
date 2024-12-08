@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Genre;
+use App\Models\GenreMovie;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,19 +22,14 @@ class Movie extends Model
 
     public $timestamps = false;
 
+    /**
+     * The genres that belongs to the movie.
+     */
     public function genres(): BelongsToMany
     {
-        return $this->belongsToMany(Genre::class, 'genre_movie');
-    }
-
-    public function mappedGenres(Collection $genres) {
-        $data = [];
-
-        foreach ($this->genres as $genre) {
-            $data[$genre->id] = $genre->name;
-        }
-
-        return $data;
+        return $this->belongsToMany(Genre::class, 'genre_movie', 'movie_id', 'genre_id')
+            ->using(GenreMovie::class);
+            // ->withPivot(['genre_id', 'movie_id']);
     }
 
     public static function getStatuses(): array
