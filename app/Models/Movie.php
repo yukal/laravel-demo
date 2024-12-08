@@ -63,9 +63,7 @@ class Movie extends Model
 
     public function getExistImageAttribute(): bool
     {
-        $publicPath = public_path('storage/');
-
-        return (!is_null($this->link) || $this->link != '')
-            && file_exists($publicPath.$this->link);
+        return !empty($this->link) 
+            && Storage::disk('public')->exists($this->link);
     }
 }

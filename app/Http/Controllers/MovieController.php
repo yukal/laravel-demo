@@ -89,18 +89,11 @@ class MovieController extends Controller
         $fields = $request->validated();
 
         if (isset($fields['image'])) {
-            if (!$movie->existImage) {
-
-                // Store new image
-                $fields['link'] = $request->image->storePublicly('movies', 'public');
-
-            } else {
-
-                // Replace existing image (using old name)
-                $imageName = str_replace("movies/", "", $movie->link);
-                $request->file('image')->storeAs('movies', $imageName, 'public');
-
+            if ($movie->existImage) {
+                Storage::disk('public')->delete($movie->link);
             }
+
+            $fields['link'] = $request->image->storePublicly('movies', 'public');
         }
 
         $movie->update($fields);
