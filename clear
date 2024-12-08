@@ -1,12 +1,11 @@
 #!/bin/bash
 
+# Useful for quick cleanup at development process
+
 php artisan cache:clear
 php artisan route:clear
 php artisan view:clear
 php artisan config:clear
 php artisan config:cache
 
-php artisan migrate:refresh
-php artisan db:seed --class GenresSeeder
-php artisan db:seed --class MoviesSeeder
-php artisan db:seed --class GenresMoviesSeeder
+php artisan migrate:refresh --seed
