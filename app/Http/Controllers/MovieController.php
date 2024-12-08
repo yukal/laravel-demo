@@ -98,13 +98,16 @@ class MovieController extends Controller
             $fields['poster'] = $request->image->storePublicly('movies', 'public');
         }
 
-        $movie->update($fields);
+        if (count($fields) > 0) {
+            $movie->update($fields);
 
-        if (isset($fields['genres'])) {
-            $movie->genres()->sync($fields['genres']);
+            if (isset($fields['genres'])) {
+                $movie->genres()->sync($fields['genres']);
+            }
         }
 
-        return redirect()->route('movies.index')
+        return redirect()
+            ->route('movies.index')
             ->with('success', 'Movie updated successfully');
     }
 
