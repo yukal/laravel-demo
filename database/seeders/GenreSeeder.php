@@ -13,6 +13,8 @@ class GenreSeeder extends Seeder
      */
     public function run(): void
     {
+        // https://boords.com/blog/100-movie-genres-the-definitive-list-with-examples
+
         DB::table('genres')->insert([
             ['id' => 1, 'name' => 'Action'],
             ['id' => 2, 'name' => 'Thriller'],
@@ -21,6 +23,15 @@ class GenreSeeder extends Seeder
             ['id' => 5, 'name' => 'Romance'],
             ['id' => 6, 'name' => 'Horror'],
             ['id' => 7, 'name' => 'Western'],
+            ['id' => 8, 'name' => 'Crime'],
+            ['id' => 9, 'name' => 'Fantasy'],
+            ['id' => 10, 'name' => 'Mystery'],
+            ['id' => 11, 'name' => 'Historical'],
+            ['id' => 12, 'name' => 'Musical'],
+            ['id' => 13, 'name' => 'Animation'],
+            ['id' => 14, 'name' => 'Documentary'],
+            ['id' => 15, 'name' => 'Adventure'],
+            ['id' => 16, 'name' => 'Science'],
         ]);
     }
 }
