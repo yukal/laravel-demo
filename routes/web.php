@@ -10,4 +10,6 @@ Route::get('/', function () {
 
 Route::resource('genres', GenreController::class);
 
+Route::get('/movies/unpublished', [MovieController::class, 'unpublished'])->name('movies.unpublished');
+Route::patch('/movies/{movie}/publish', [MovieController::class, 'publish'])->name('movies.publish');
 Route::resource('movies', MovieController::class);

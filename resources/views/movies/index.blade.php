@@ -10,7 +10,7 @@
             <a class="btn btn-primary btn-sm" href="{{ route('movies.index') }}">
                 <i class="fa fa-eye"></i> Unpublished</a>
         @else
-            <a class="btn btn-outline-primary btn-sm" href="{{ route('movies.index') . '?unpublished=1' }}">
+            <a class="btn btn-outline-primary btn-sm" href="{{ route('movies.unpublished') }}">
                 <i class="fa fa-eye"></i> Unpublished</a>
         @endif
     </div>
@@ -35,8 +35,10 @@
                     <td>{{ $movie->status_text }}</td>
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Action">
+                            @if (!$movie->is_published)
                             <button type="button" class="btn btn-outline-primary" onclick="submitPublish({{ $movie->id }})">
                                 <i class="fa-solid fa-eye"></i> Publish</button>
+                            @endif
 
                             <a class="btn btn-outline-primary" href="{{ route('movies.edit', $movie->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
@@ -69,13 +71,17 @@
     <script>
         function submitPublish(movieID) {
             var form = document.forms['form-publish'];
-            form.action = `{{ route('movies.publish', '') }}/${movieID}`;
+            form.action = `{{ route('movies.publish', '__movieID__') }}`
+                .replace('__movieID__', movieID);
+
             form.submit();
         }
 
         function submitDestroy(movieID) {
             var form = document.forms['form-destroy'];
-            form.action = `{{ route('movies.destroy', '') }}/${movieID}`;
+            form.action = `{{ route('movies.destroy', '__movieID__') }}`
+                .replace('__movieID__', movieID);
+
             form.submit();
         }
     </script>
