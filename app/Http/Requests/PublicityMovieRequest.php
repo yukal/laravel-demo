@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Movie;
 
-class PublishMovieRequest extends FormRequest
+class PublicityMovieRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,9 @@ class PublishMovieRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'is_published' => [
-                'integer',
-                'in:' . implode(',', array_keys(Movie::getStatuses()))
+            'published' => [
+                'sometimes',
+                'boolean',
             ],
         ];
     }

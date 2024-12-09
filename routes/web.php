@@ -32,8 +32,8 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('genres', GenreController::class);
 
-Route::get('/movies/unpublished', [MovieController::class, 'unpublished'])->name('movies.unpublished');
-Route::patch('/movies/{movie}/publish', [MovieController::class, 'publish'])->name('movies.publish');
+// Route::get('/movies/unpublished', [MovieController::class, 'unpublished'])->name('movies.unpublished');
+Route::patch('/movies/{movie}/publicity', [MovieController::class, 'publicity'])->name('movies.publicity');
 Route::resource('movies', MovieController::class);
 
 require __DIR__.'/auth.php';

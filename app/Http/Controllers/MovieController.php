@@ -18,28 +18,37 @@ class MovieController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): View
+    public function index(Request $request): Response
     {
-        $isShowUnpublished = false;
-        $movies = Movie::where('is_published', 1)->paginate(10);
-        $statuses = Movie::getStatuses();
+        // $movies = Movie::where('published', 1)
+        //     ->orderBy('id', 'desc')
+        //     ->paginate(10);
 
-        return view('movies.index', compact('movies', 'statuses', 'isShowUnpublished'))
-            ->with('i', ($request->input('page', 1) - 1) * $movies->perPage());
+        $movies = Movie::orderBy('id', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Movies/Index', [
+            'movies' => $movies,
+            'statuses' => Movie::getStatuses(),
+            'i' => ($request->input('page', 1) - 1) * $movies->perPage(),
+        ]);
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function unpublished(Request $request): View
-    {
-        $isShowUnpublished = true;
-        $movies = Movie::where('is_published', 0)->paginate(10);
-        $statuses = Movie::getStatuses();
+    // public function unpublished(Request $request): Response
+    // {
+    //     $movies = Movie::where('published', 0)
+    //         ->orderBy('id', 'desc')
+    //         ->paginate(10);
 
-        return view('movies.index', compact('movies', 'statuses', 'isShowUnpublished'))
-            ->with('i', ($request->input('page', 1) - 1) * $movies->perPage());
-    }
+    //     return Inertia::render('Movies/Index', [
+    //         'movies' => $movies,
+    //         'statuses' => Movie::getStatuses(),
+    //         'i' => ($request->input('page', 1) - 1) * $movies->perPage(),
+    //     ]);
+    // }
 
     /**
      * Show the form for creating a new resource.

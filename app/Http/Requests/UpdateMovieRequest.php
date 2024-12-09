@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Movie;
 
 class UpdateMovieRequest extends FormRequest
 {
@@ -41,10 +40,9 @@ class UpdateMovieRequest extends FormRequest
                 'image', 'mimes:jpeg,jpg,png,gif', 'max:2048',
             ],
 
-            'is_published' => [
+            'published' => [
                 'sometimes',
-                'numeric',
-                'in:' . implode(',', array_keys(Movie::getStatuses()))
+                'bool',
             ],
         ];
     }
