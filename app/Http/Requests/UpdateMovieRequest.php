@@ -34,7 +34,7 @@ class UpdateMovieRequest extends FormRequest
                 'list', 'min:1',
             ],
 
-            'image' => [
+            'poster' => [
                 'sometimes',
                 'required',
                 'image', 'mimes:jpeg,jpg,png,gif', 'max:2048',
