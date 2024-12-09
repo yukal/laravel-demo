@@ -11,25 +11,21 @@ use Illuminate\Support\Facades\Storage;
 
 class Movie extends Model
 {
-    const UNPUBLISHED = 0;
-    const PUBLISHED = 1;
+    const UNPUBLISHED = false;
+    const PUBLISHED = true;
 
     protected $hidden = ['pivot'];
     protected $fillable = [
         'name',
         'poster',
-        'is_published',
+        'published',
+    ];
+
+    protected $appends = [
+        'publishedText',
     ];
 
     public $timestamps = false;
-
-    /**
-     * The genres that belongs to the movie.
-     */
-    public function genres(): BelongsToMany
-    {
-        return $this->belongsToMany(Genre::class, 'genre_movie', 'movie_id', 'genre_id');
-    }
 
     public static function getStatuses(): array
     {
@@ -39,6 +35,16 @@ class Movie extends Model
         ];
     }
 
+    /**
+     * The genres that belongs to the movie.
+     */
+    public function genres(): BelongsToMany
+    {
+        return $this->belongsToMany(Genre::class, 'genre_movie', 'movie_id', 'genre_id')
+            ->using(GenreMovie::class);
+            // ->withPivot(['genre_id', 'movie_id']);
+    }
+
     public function getGenresMapAttribute(): array
     {
         return $this->genres()
@@ -46,23 +52,23 @@ class Movie extends Model
             ->toArray();
     }
 
-    public function getGenresNamesAttribute(): array
+    public function getGenresIDsAttribute(): array
     {
         return $this->genres()
-            ->pluck('name')
+            ->pluck('id')
             ->toArray();
     }
 
-    public function getStatusTextAttribute(): string
+    public function getPublishedTextAttribute(): string
     {
-        return match ($this->is_published) {
+        return match ($this->published) {
             self::UNPUBLISHED => 'unpublished',
             self::PUBLISHED => 'published',
             default => 'unknown',
         };
     }
 
-    public function getExistImageAttribute(): bool
+    public function getPosterExistAttribute(): bool
     {
         return !empty($this->poster) 
             && Storage::disk('public')->exists($this->poster);
