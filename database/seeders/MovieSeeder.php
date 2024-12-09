@@ -15,7 +15,7 @@ class MovieSeeder extends Seeder
     {
         // http://www.impawards.com/intl/
 
-        DB::table('movies')->insert([
+        $rows = [
             // 1. Action
             [
                 'id' => 1,
@@ -127,6 +127,14 @@ class MovieSeeder extends Seeder
                 // 'link' => 'https://m.imdb.com/title/tt27717667/',
                 'published' => false,
             ],
-        ]);
+        ];
+
+        // the next ID number
+        $sequence = count($rows) + 1;
+
+        DB::table('movies')->insert($rows);
+        DB::update(
+            'ALTER SEQUENCE IF EXISTS public.movies_id_seq NO MINVALUE RESTART '.$sequence.' CACHE '.$sequence
+        );
     }
 }
