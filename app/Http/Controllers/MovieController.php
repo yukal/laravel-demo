@@ -35,6 +35,19 @@ class MovieController extends Controller
         ]);
     }
 
+    public function preview(Request $request): Response
+    {
+        $movies = Movie::where('published', true)
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Movies/Preview-v2', [
+            'movies' => $movies,
+            'statuses' => Movie::getStatuses(),
+            'i' => ($request->input('page', 1) - 1) * $movies->perPage(),
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -34,6 +34,7 @@ Route::resource('genres', GenreController::class);
 
 // Route::get('/movies/unpublished', [MovieController::class, 'unpublished'])->name('movies.unpublished');
 Route::patch('/movies/{movie}/publicity', [MovieController::class, 'publicity'])->name('movies.publicity');
+Route::get('/preview', [MovieController::class, 'preview'])->name('movies.preview');
 Route::resource('movies', MovieController::class);
 
 require __DIR__.'/auth.php';
