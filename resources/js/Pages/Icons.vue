@@ -13,7 +13,6 @@ import BtnBack from '@/Components/Custom/BtnBack.vue';
 import UseIcon from '@/Components/Custom/UseIcon.vue';
 
 var strokeIcons = ref([
-    'laravel',
     'house',
     'arrow-big-left-dash',
     'arrow-big-left',
@@ -37,6 +36,7 @@ var strokeIcons = ref([
 ]);
 
 var flatIcons = ref([
+    'laravel',
     'people-circle',
     'grid',
     'at',
