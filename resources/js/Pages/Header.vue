@@ -34,7 +34,7 @@ var showingNavigationDropdown = ref(false);
                 </div>
             </div>
 
-            <div class="sm:hidden hs-collapse overflow-hidden transition-all duration-300 basis-full grow sm:block" aria-labelledby="hs-navbar-example-collapse"
+            <div class="hs-collapse overflow-hidden transition-all duration-300 basis-full grow sm:block" aria-labelledby="hs-navbar-example-collapse"
                 :class="{
                     block: showingNavigationDropdown,
                     hidden: !showingNavigationDropdown,
