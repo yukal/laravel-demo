@@ -6,6 +6,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import UseIcon from '@/Components/Custom/UseIcon.vue';
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -23,9 +24,7 @@ const showingNavigationDropdown = ref(false);
                             <!-- Logo -->
                             <div class="flex shrink-0 items-center">
                                 <Link :href="route('dashboard')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
-                                    />
+                                    <UseIcon name="laravel" size="36" color="#e5e7eb" class="block w-auto" />
                                 </Link>
                             </div>
 
@@ -54,18 +53,7 @@ const showingNavigationDropdown = ref(false);
                                             >
                                                 {{ $page.props.auth.user.name }}
 
-                                                <svg
-                                                    class="-me-0.5 ms-2 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd"
-                                                    />
-                                                </svg>
+                                                <UseIcon name="chevron-down" size="20" class="-me-0.5 ms-2 h-4 w-4" />
                                             </button>
                                         </span>
                                     </template>
@@ -91,41 +79,20 @@ const showingNavigationDropdown = ref(false);
                         <!-- Hamburger -->
                         <div class="-me-2 flex items-center sm:hidden">
                             <button
-                                @click="
-                                    showingNavigationDropdown =
-                                        !showingNavigationDropdown
-                                "
+                                @click="showingNavigationDropdown = !showingNavigationDropdown"
                                 class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400"
                             >
-                                <svg
-                                    class="h-6 w-6"
-                                    stroke="currentColor"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex':
-                                                !showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex':
-                                                showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
+                                <UseIcon name="hamburger" size="24" :wstroke="2" class="h-6 w-6"
+                                    :class="{
+                                        hidden: showingNavigationDropdown,
+                                        'inline-flex': !showingNavigationDropdown,
+                                    }" />
+
+                                <UseIcon name="x" size="24" :wstroke="2" class="h-6 w-6"
+                                    :class="{
+                                        hidden: !showingNavigationDropdown,
+                                        'inline-flex': showingNavigationDropdown,
+                                    }" />
                             </button>
                         </div>
                     </div>

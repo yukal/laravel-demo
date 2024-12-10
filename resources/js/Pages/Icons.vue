@@ -1,7 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import { ref, reactive, inject, onMounted } from 'vue';
-// import { updateMovie, canSubmit } from '@/api';
+import { ref } from 'vue';
 
 import Header from './Header.vue';
 import Footer from './Footer.vue';
@@ -15,48 +14,41 @@ import UseIcon from '@/Components/Custom/UseIcon.vue';
 
 var strokeIcons = ref([
     'laravel',
-	'house',
+    'house',
     'arrow-big-left-dash',
     'arrow-big-left',
     'arrow-right',
     'chevron-left',
     'chevron-right',
-	'x',
-	'plus',
-	'circle-plus',
-	'circle-alert',
+    'x',
+    'plus',
+    'circle-plus',
+    'circle-alert',
     'eye-closed',
     'eye',
     'eye-off',
-	'trash-2',
-	'trash-3',
-	'pencil',
+    'trash-2',
+    'trash-3',
+    'pencil',
+    'file-pen-line',
     'file-check',
     'file-check-2',
-	'file-pen-line',
-	'save',
+    'save',
 ]);
 
 var flatIcons = ref([
-    'bootstrap',
-	'people-circle',
-	'grid',
-	'at',
-	'house-1',
-	'house-2',
-	'house-3',
-	'diploma-verified',
-	'heart',
-	'tooling',
-	'chess-pawn-1',
-	'chess-pawn-2',
-	'chess-pawn-3',
-	'forward',
-	'backward',
-	'dot',
-	'dot-lg',
-	'door',
-	'exclamation-circle-fill',
+    'people-circle',
+    'grid',
+    'at',
+    'house-1',
+    'house-2',
+    'diploma-verified',
+    'heart',
+    'backward',
+    'forward',
+    'dot',
+    'dot-lg',
+    'exclamation-circle-fill',
     'movie',
     'newspaper',
 ]);
@@ -65,7 +57,7 @@ var flatIcons = ref([
 
 <template>
 
-    <Head title="Movie" />
+    <Head title="Icons" />
 
     <div class="flex flex-col flex-nowrap justify-between items-center gap-4 h-full px-4 sm:px-6 lg:px-8">
         <Header>

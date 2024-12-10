@@ -1,5 +1,9 @@
 <script setup>
+import { ref } from 'vue';
 import { Link } from '@inertiajs/vue3';
+import UseIcon from '@/Components/Custom/UseIcon.vue';
+
+var showingNavigationDropdown = ref(false);
 </script>
 
 <template>
@@ -9,15 +13,32 @@ import { Link } from '@inertiajs/vue3';
                 <Link href="/" class="flex-none text-xl font-semibold focus:outline-none focus:opacity-80" aria-label="TestTask">TestTask</Link>
 
                 <div class="sm:hidden">
-                    <button type="button" class="hs-collapse-toggle relative size-7 flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" id="hs-navbar-example-collapse" aria-expanded="false" aria-controls="hs-navbar-example" aria-label="Toggle navigation" data-hs-collapse="#hs-navbar-example">
-                        <svg class="hs-collapse-open:hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
-                        <svg class="hs-collapse-open:block hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    <button
+                        @click="showingNavigationDropdown = !showingNavigationDropdown"
+                        class="inline-flex items-center justify-center rounded-md p-2 text-gray-800 transition duration-150 ease-in-out border border-gray-200 hover:bg-white hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400"
+                    >
+                        <UseIcon name="hamburger" size="24" :wstroke="2" class="h-6 w-6"
+                            :class="{
+                                hidden: showingNavigationDropdown,
+                                'inline-flex': !showingNavigationDropdown,
+                            }" />
+
+                        <UseIcon name="x" size="24" :wstroke="2" class="h-6 w-6"
+                            :class="{
+                                hidden: !showingNavigationDropdown,
+                                'inline-flex': showingNavigationDropdown,
+                            }" />
+
                         <span class="sr-only">Toggle navigation</span>
                     </button>
                 </div>
             </div>
 
-            <div id="hs-navbar-example" class="hidden hs-collapse overflow-hidden transition-all duration-300 basis-full grow sm:block" aria-labelledby="hs-navbar-example-collapse">
+            <div class="sm:hidden hs-collapse overflow-hidden transition-all duration-300 basis-full grow sm:block" aria-labelledby="hs-navbar-example-collapse"
+                :class="{
+                    block: showingNavigationDropdown,
+                    hidden: !showingNavigationDropdown,
+                }">
                 <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
                     <slot name="navbar"></slot>
                 </div>
