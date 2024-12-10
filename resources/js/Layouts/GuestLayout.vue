@@ -1,6 +1,6 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { Link } from '@inertiajs/vue3';
+import UseIcon from '@/Components/Custom/UseIcon.vue';
 </script>
 
 <template>
@@ -9,7 +9,7 @@ import { Link } from '@inertiajs/vue3';
     >
         <div>
             <Link href="/">
-                <ApplicationLogo class="h-20 w-20 fill-current text-gray-500" />
+                <UseIcon name="laravel" size="62" color="#FF2D20" />
             </Link>
         </div>
 
