@@ -47,8 +47,8 @@ php artisan make:view movies.show
 php artisan install:api
 
 # Create controllers for the API
-php artisan make:controller Api\V1\GenreController
-php artisan make:controller Api\V1\MovieController
+php artisan make:controller Api/V1/GenreController --api --model Genre
+php artisan make:controller Api/V1/MovieController --api --model Movie
 
 npm install
 ```

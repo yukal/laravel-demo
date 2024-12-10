@@ -7,7 +7,7 @@ All additional dependencies (e.g. vue, vite, inertia) from the main branch have 
 
 See the [task description](_workflow/task-en.md), and the [workflow](_workflow).
 
-![Laravel app within Vue, Inertia, Tailwind - a test task](/_workflow/08-create-movie.png)
+![Laravel app within Vue, Inertia, Tailwind - a test task](/_workflow/07-create-movie.png)
 
 ## Init
 
