@@ -23,7 +23,7 @@ defineProps({
 <template>
     <Head title="Welcome" />
 
-    <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
+    <div class="bg-gray-50 text-black/50 dark:bg-zinc-900 dark:text-white/50">
         <div class="relative flex min-h-screen flex-col items-center justify-center">
             <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                 <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
@@ -50,7 +50,7 @@ defineProps({
                 <main class="mt-6">
                     <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                         <Link :href="route('genres.index')"
-                            class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
+                            class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(8,8,11,0.06)] ring-2 ring-zinc-800 transition duration-200 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-8 dark:bg-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
                             <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
                                 <UseIcon name="newspaper" size="24" color="#FF2D20" />
                             </div>
@@ -71,7 +71,7 @@ defineProps({
                         </Link>
 
                         <Link :href="route('movies.index')"
-                            class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
+                            class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(8,8,11,0.06)] ring-2 ring-zinc-800 transition duration-200 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-8 dark:bg-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
                             <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
                                 <UseIcon name="movie" size="24" color="#FF2D20" />
                             </div>
