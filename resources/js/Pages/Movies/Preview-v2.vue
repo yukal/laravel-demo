@@ -32,7 +32,7 @@ var props = defineProps({
 
     <Head title="Preview" />
 
-    <div class="flex flex-col flex-nowrap justify-between items-center gap-4 h-full px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto flex flex-col flex-nowrap justify-between items-center gap-10 md:gap-14 lg:gap-14 px-5 h-full">
         <Header>
             <template #navbar>
                 <NavBar :items="[
@@ -50,8 +50,8 @@ var props = defineProps({
             </template>
         </Header>
 
-        <main class="flex-grow w-full border-t border-b border-gray-200">
-            <header class="max-w-[85rem] px-4 py-4 sm:px-6 mx-auto grid gap-3 md:flex md:justify-between md:items-center">
+        <main class="flex-grow w-full">
+            <header class="pb-10 grid gap-3 md:flex md:justify-between md:items-center">
                 <div>
                     <h2 class="text-xl font-semibold text-gray-800">Preview</h2>
                 </div>
@@ -66,35 +66,29 @@ var props = defineProps({
                 </div>
             </header>
 
-            <!-- Card Blog -->
-            <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:py-14 mx-auto">
+            <!-- Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
 
-                <!-- Grid -->
-                <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Card -->
+                <Link v-for="(movie, n) of movies.data" :key="movies.data.id"
+                        :href="route('movies.show', movie.id)"
+                        class="group block rounded-md overflow-hidden focus:outline-none pb-4"
+                    >
+                    <div class="relative sm:pt-[150%] pt-[170%] overflow-hidden">
+                        <img v-if="movie.poster" :src="`/storage/${movie.poster}`" :alt="movie.name" class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out">
+                        <img v-else src="/storage/no-image-placeholder.svg" :alt="movie.name" class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out">
 
-                    <!-- Card -->
-                    <Link v-for="(movie, n) of movies.data" :key="movies.data.id"
-                            :href="route('movies.show', movie.id)"
-                            class="group block rounded-md overflow-hidden focus:outline-none pb-4"
-                        >
-                        <div class="relative pt-[50%] sm:pt-[70%] overflow-hidden">
-                            <img v-if="movie.poster" :src="`/storage/${movie.poster}`" :alt="movie.name" class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out">
-                            <img v-else src="/storage/no-image-placeholder.svg" :alt="movie.name" class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out">
-    
-                            <span class="absolute top-0 end-0 rounded-es-md text-xs font-medium bg-gray-800 text-white py-1.5 px-3">Sponsored</span>
-                        </div>
-    
-                        <div class="mt-4">
-                            <h3 class="text-xl font-semibold text-gray-800 group-hover:text-gray-600">{{ movie.name }}</h3>
-                        </div>
-                    </Link>
-                    <!-- End Card -->
-    
-                </div>
-                <!-- End Grid -->
+                        <span class="absolute top-0 end-0 rounded-es-md text-xs font-medium bg-gray-800 text-white py-1.5 px-3">Sponsored</span>
+                    </div>
+
+                    <div class="mt-4">
+                        <h3 class="text-xl font-semibold text-gray-800 group-hover:text-gray-600">{{ movie.name }}</h3>
+                    </div>
+                </Link>
+                <!-- End Card -->
 
             </div>
-            <!-- End Card Blog -->
+            <!-- End Grid -->
 
         </main>
 

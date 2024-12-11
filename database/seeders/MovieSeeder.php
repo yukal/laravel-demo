@@ -54,7 +54,7 @@ class MovieSeeder extends Seeder
                 'name' => 'Megalopolis',
                 'poster' => 'movies/CgwXUf3ykeAw4yve0z3RZE8XrvSgxrCQTTILNtZC.jpg',
                 // 'link' => 'https://www.imdb.com/title/tt10128846/',
-                'published' => true,
+                'published' => false,
             ],
 
             // 4. Comedy
