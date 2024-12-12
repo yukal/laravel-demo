@@ -62,6 +62,45 @@ form .error label .badge {
     @apply bg-red-100 text-red-800
 }
 
+/* HEADER */
+
+header.header {
+    @apply w-full mx-auto pt-8
+}
+
+header.header .navigation {
+    @apply w-full mx-auto 
+    sm:flex sm:items-center sm:justify-between
+}
+
+header.header .navigation .brand-wrap {
+    @apply flex items-center justify-between
+}
+
+header.header .navigation .brand {
+    @apply flex-none text-xl font-semibold focus:outline-none focus:opacity-80
+}
+
+header.header .navigation .btn-toggle-menu {
+    @apply inline-flex items-center justify-center rounded-md sm:hidden p-2 text-gray-800 
+        transition duration-150 ease-in-out border border-gray-200 hover:bg-white hover:text-gray-500 
+        focus:bg-gray-100 focus:text-gray-500 focus:outline-none 
+        dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 
+        dark:focus:bg-gray-900 dark:focus:text-gray-400
+}
+
+header.header .navigation [aria-labelledby="navbar-collapse"] {
+    @apply overflow-hidden transition-all duration-300 basis-full grow sm:block
+}
+
+header.header .navigation .menu {
+    @apply flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5
+}
+
+header.header .menu {
+    /* @apply  */
+}
+
 /* FOOTER */
 
 footer.footer {
