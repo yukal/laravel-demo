@@ -41,49 +41,47 @@ var form = useForm({
             </template>
         </Header>
 
-        <main class="flex-grow w-full">
-            <section class="container mx-auto max-w-screen-sm">
-                <Card>
-                    <template #headerTitle>
-                        <h2 class="text-xl font-semibold text-gray-800">Create Genre</h2>
-                        <!-- <p class="text-sm text-gray-600 mt-1">Create new genre.</p> -->
-                    </template>
+        <main class="flex-grow container mx-auto max-w-screen-md">
+            <Card>
+                <template #headerTitle>
+                    <h2 class="text-xl font-semibold text-gray-800">Create Genre</h2>
+                    <!-- <p class="text-sm text-gray-600 mt-1">Create new genre.</p> -->
+                </template>
 
-                    <template #headerBody>
-                        <BtnBack class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-md border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none" />
-                    </template>
+                <template #headerBody>
+                    <BtnBack />
+                </template>
 
-                    <template #content>
-                        <form @submit.prevent="createGenre(form)" name="create-genre" class="p-10">
-                            <section :class="{ 'error': form.errors.name }">
-                                <label for="form-input-create-genre" class="mb-2">
-                                    New name <span class="badge">required</span>
-                                </label>
+                <template #content>
+                    <form @submit.prevent="createGenre(form)" name="create-genre" class="p-10">
+                        <section :class="{ 'error': form.errors.name }">
+                            <label for="form-input-create-genre" class="mb-2">
+                                New name <span class="badge">required</span>
+                            </label>
 
-                                <div class="relative">
-                                    <input type="text" required id="form-input-create-genre" v-model="form.name"
-                                        aria-describedby="form-input-create-genre">
-                                    <div v-if="form.errors.name"
-                                        class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
-                                        <UseIcon name="exclamation-circle-fill" size="16" color="#ef4444" />
-                                    </div>
+                            <div class="relative">
+                                <input type="text" required id="form-input-create-genre" v-model="form.name"
+                                    aria-describedby="form-input-create-genre">
+                                <div v-if="form.errors.name"
+                                    class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                                    <UseIcon name="exclamation-circle-fill" size="16" color="#ef4444" />
                                 </div>
-
-                                <p v-if="form.errors.name" class="text-sm text-red-600 mt-2">{{ form.errors.name }}.</p>
-                            </section>
-
-                            <div class="flex gap-x-1 mt-4">
-                                <Btn type="submit" icon="plus" :disabled="canSubmit(form)">Add</Btn>
-
-                                <button type="button" onclick="history.back()"
-                                    class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-md border-transparent focus:outline-none text-slate-600 hover:text-slate-800">
-                                    <UseIcon name="x" size="14" :wstroke="2" /> Cancel
-                                </button>
                             </div>
-                        </form>
-                    </template>
-                </Card>
-            </section>
+
+                            <p v-if="form.errors.name" class="text-sm text-red-600 mt-2">{{ form.errors.name }}.</p>
+                        </section>
+
+                        <div class="flex gap-x-1 mt-4">
+                            <Btn type="submit" icon="plus" :disabled="canSubmit(form)">Add</Btn>
+
+                            <button type="button" onclick="history.back()"
+                                class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-md border-transparent focus:outline-none text-slate-600 hover:text-slate-800">
+                                <UseIcon name="x" size="14" :wstroke="2" /> Cancel
+                            </button>
+                        </div>
+                    </form>
+                </template>
+            </Card>
         </main>
 
         <Footer />

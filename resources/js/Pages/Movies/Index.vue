@@ -64,7 +64,7 @@ var props = defineProps({
                 </template>
 
                 <template #headerBody>
-                    <BtnBack class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-md border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none" />
+                    <BtnBack />
 
                     <!-- <Link v-if="route().current('movies.unpublished')" :href="route('movies.index')" 
                         class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-md border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Unpublished</Link> -->
