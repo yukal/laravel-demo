@@ -6,6 +6,10 @@
     @apply h-full;
 }
 
+.flex-container {
+    @apply h-full flex flex-col flex-nowrap justify-between items-center gap-4 px-4 sm:px-6 lg:px-8
+}
+
 /* BUTTON  */
 
 .btn-check {

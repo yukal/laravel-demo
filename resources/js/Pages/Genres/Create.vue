@@ -22,7 +22,7 @@ var form = useForm({
 
     <Head title="Genre" />
 
-    <div class="flex flex-col flex-nowrap justify-between items-center gap-4 h-full px-4 sm:px-6 lg:px-8">
+    <div class="flex-container">
         <Header>
             <template #navbar>
                 <NavBar :items="[
