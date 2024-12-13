@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', length: 80);
             $table->string('poster', length: 160)->nullable();
-            $table->smallInteger('is_published')->default(0);
-            // $table->boolean('is_published')->default(false);
+            $table->boolean('published')->default(false);
             // $table->timestamps();
         });
     }

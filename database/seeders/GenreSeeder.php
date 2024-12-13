@@ -15,7 +15,7 @@ class GenreSeeder extends Seeder
     {
         // https://boords.com/blog/100-movie-genres-the-definitive-list-with-examples
 
-        DB::table('genres')->insert([
+        $rows = [
             ['id' => 1, 'name' => 'Action'],
             ['id' => 2, 'name' => 'Thriller'],
             ['id' => 3, 'name' => 'Drama'],
@@ -32,6 +32,14 @@ class GenreSeeder extends Seeder
             ['id' => 14, 'name' => 'Documentary'],
             ['id' => 15, 'name' => 'Adventure'],
             ['id' => 16, 'name' => 'Science'],
-        ]);
+        ];
+
+        // the next ID number
+        $sequence = count($rows) + 1;
+
+        DB::table('genres')->insert($rows);
+        DB::update(
+            'ALTER SEQUENCE IF EXISTS public.genres_id_seq NO MINVALUE RESTART '.$sequence.' CACHE '.$sequence
+        );
     }
 }

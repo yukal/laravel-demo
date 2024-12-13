@@ -28,10 +28,10 @@ class GenreMovie extends Pivot
         'movie_id',
     ];
 
-    protected $fillable = [
-        'genre_id',
-        'movie_id',
-    ];
+    // protected $fillable = [
+    //     'genre_id',
+    //     'movie_id',
+    // ];
 
     public $timestamps = false;
 

@@ -3,11 +3,15 @@
 ## Test Task using Laravel
 
 This is a test task within the Laravel framework usage.
-All additional dependencies (e.g. vue, vite, inertia)from the main branch have been removed to simplify the demonstration of the first version of the workflow. I use additional dependencies (e.g. vue, vite, inertia, tailwindcss) in another branch, please see in the list of [branches](https://github.com/yukal/test_task/branches).
+All additional dependencies (e.g. vue, vite, inertia) from the main branch have been removed to simplify the demonstration of the first version of the workflow. I use additional dependencies (e.g. vue, vite, inertia, tailwindcss) in another branch, please see in the list of [branches](https://github.com/yukal/test_task/branches).
 
 See the [task description](_workflow/task-en.md), and the [workflow](_workflow).
 
+![Laravel app within Vue, Inertia, Tailwind - a test task](/_workflow/07-create-movie.png)
+
 ## Init
+
+Before init, please set `DB_PASSWORD`, at [.env.example](.env.example)!
 
 ```bash
 # Install dependencies

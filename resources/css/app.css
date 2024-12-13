@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#app {
+    @apply h-full;
+}
+
+.flex-container {
+    @apply h-full flex flex-col flex-nowrap justify-between items-center gap-4 px-4 sm:px-6 lg:px-8
+}
+
+/* BUTTON  */
+
+.btn-check {
+    @apply py-2 px-3
+        bg-white text-gray-800
+        text-sm font-medium
+        rounded-md border
+        border-gray-200 shadow-sm
+
+        hover:bg-gray-50 
+        focus:outline-none
+        focus:bg-gray-50
+        disabled:opacity-50
+        disabled:pointer-events-none
+        transition-[background]
+}
+
+.btn-check.checked {
+    @apply bg-blue-600 text-white
+        border-transparent 
+        hover:bg-blue-700
+        focus:outline-none
+        focus:bg-blue-700
+        disabled:opacity-50
+        disabled:pointer-events-none
+        transition-[background]
+}
+
+.btn-back {
+    @apply py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-md border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none
+}
+
+/* FORM */
+
+form input[type=text] {
+    @apply py-3 px-4 block w-full rounded-lg text-sm
+        disabled:opacity-50
+        disabled:pointer-events-none
+
+        border-gray-300 focus:border-blue-500 focus:ring-blue-500
+}
+
+form label {
+    @apply block text-sm font-medium
+}
+
+form label .badge {
+    @apply inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium
+    bg-gray-100 text-gray-800
+    /* bg-gray-50 text-gray-500 */
+}
+
+form .error input {
+    @apply border-red-500 focus:border-red-500 focus:ring-red-500
+}
+
+form .error label .badge {
+    @apply bg-red-100 text-red-800
+}
+
+/* HEADER */
+
+header.header {
+    @apply w-full mx-auto pt-8
+}
+
+header.header .navigation {
+    @apply w-full mx-auto 
+    sm:flex sm:items-center sm:justify-between
+}
+
+header.header .navigation .brand-wrap {
+    @apply flex items-center justify-between
+}
+
+header.header .navigation .brand {
+    @apply flex-none text-xl font-semibold focus:outline-none focus:opacity-80
+}
+
+header.header .navigation .btn-toggle-menu {
+    @apply inline-flex items-center justify-center rounded-md sm:hidden p-2 text-gray-800 
+        transition duration-150 ease-in-out border border-gray-200 hover:bg-white hover:text-gray-500 
+        focus:bg-gray-100 focus:text-gray-500 focus:outline-none 
+        dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 
+        dark:focus:bg-gray-900 dark:focus:text-gray-400
+}
+
+header.header .navigation [aria-labelledby="navbar-collapse"] {
+    @apply overflow-hidden transition-all duration-300 basis-full grow sm:block
+}
+
+header.header .navigation .menu {
+    @apply flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5
+}
+
+header.header .menu {
+    /* @apply  */
+}
+
+/* FOOTER */
+
+footer.footer {
+    @apply w-full mx-auto px-4 py-10
+}
+
+footer.footer .brand {
+    @apply text-center md:text-left
+    flex-none text-xl font-semibold text-black focus:outline-none
+}
+
+footer.footer .menu {
+    @apply text-center
+}
+
+footer.footer .menu .item {
+    @apply inline-block relative pe-8 last:pe-0 last-of-type:before:hidden 
+        before:absolute before:top-1/2 before:end-3 
+        before:-translate-y-1/2 before:content-['/'] before:text-gray-300
+}
+
+footer.footer .menu .item a {
+    @apply
+    inline-flex gap-x-2 text-sm text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800
+}
+
+footer.footer .socials {
+    @apply
+    text-center md:text-end space-x-2
+}
+
+footer.footer .socials a {
+    @apply
+    size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-500 hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none
+}
+
+footer.footer .copyright {
+    @apply sm:flex sm:items-center sm:justify-center mt-10
+        text-center text-sm text-gray-500 lg:mt-5 lg:text-right
+}

@@ -5,49 +5,73 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
+use Inertia\Inertia;
+use Inertia\Response;
 
 use App\Models\Movie;
 use App\Models\Genre;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
-use App\Http\Requests\PublishMovieRequest;
+use App\Http\Requests\PublicityMovieRequest;
 
 class MovieController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): View
+    public function index(Request $request): Response
     {
-        $isShowUnpublished = false;
-        $movies = Movie::where('is_published', 1)->paginate(10);
-        $statuses = Movie::getStatuses();
+        // $movies = Movie::where('published', 1)
+        //     ->orderBy('id', 'desc')
+        //     ->paginate(10);
 
-        return view('movies.index', compact('movies', 'statuses', 'isShowUnpublished'))
-            ->with('i', ($request->input('page', 1) - 1) * $movies->perPage());
+        $movies = Movie::orderBy('id', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Movies/Index', [
+            'movies' => $movies,
+            'statuses' => Movie::getStatuses(),
+            'i' => ($request->input('page', 1) - 1) * $movies->perPage(),
+        ]);
+    }
+
+    public function preview(Request $request): Response
+    {
+        $movies = Movie::where('published', true)
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Movies/Preview-v2', [
+            'movies' => $movies,
+            'statuses' => Movie::getStatuses(),
+            'i' => ($request->input('page', 1) - 1) * $movies->perPage(),
+        ]);
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function unpublished(Request $request): View
-    {
-        $isShowUnpublished = true;
-        $movies = Movie::where('is_published', 0)->paginate(10);
-        $statuses = Movie::getStatuses();
+    // public function unpublished(Request $request): Response
+    // {
+    //     $movies = Movie::where('published', 0)
+    //         ->orderBy('id', 'desc')
+    //         ->paginate(10);
 
-        return view('movies.index', compact('movies', 'statuses', 'isShowUnpublished'))
-            ->with('i', ($request->input('page', 1) - 1) * $movies->perPage());
-    }
+    //     return Inertia::render('Movies/Index', [
+    //         'movies' => $movies,
+    //         'statuses' => Movie::getStatuses(),
+    //         'i' => ($request->input('page', 1) - 1) * $movies->perPage(),
+    //     ]);
+    // }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create(): Response
     {
-        $genres = Genre::All();
-        return view('movies.create', compact('genres'));
+        return Inertia::render('Movies/Create', [
+            'genres' => Genre::All(),
+        ]);
     }
 
     /**
@@ -57,37 +81,39 @@ class MovieController extends Controller
     {
         $fields = $request->validated();
 
-        if (isset($fields['image'])) {
-            // $fields['poster'] = $request->image->storePublicly('movies', 'local');
-            $fields['poster'] = $request->image->storePublicly('movies', 'public');
+        if ($request->hasFile('poster') && isset($fields['poster'])) {
+            $fields['poster'] = $request->poster->storePublicly('movies', 'public');
         }
 
         $movie = Movie::create($fields);
         $movie->genres()->sync($fields['genres']);
 
-        return redirect()->route('movies.index', ['unpublished' => 1])
+        return redirect()->route('movies.index')
             ->with('success', 'Movie created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Movie $movie): View
+    public function show(Movie $movie): Response
     {
-        $movie->append(['statusText']);
-        return view('movies.show', compact('movie'));
+        return Inertia::render('Movies/Show', [
+            'movie' => $movie->load(['genres']),
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Movie $movie): View
+    public function edit(Movie $movie): Response
     {
-        $genres = Genre::All();
-        $statuses = Movie::getStatuses();
-        $movie->append(['_genresMap']);
-
-        return view('movies.edit', compact('movie', 'genres', 'statuses'));
+        return Inertia::render('Movies/Edit', [
+            'movie' => $movie->append([
+                'genresIDs',
+            ]),
+            'genres' => Genre::All(),
+            'statuses' => Movie::getStatuses(),
+        ]);
     }
 
     /**
@@ -96,13 +122,15 @@ class MovieController extends Controller
     public function update(UpdateMovieRequest $request, Movie $movie): RedirectResponse
     {
         $fields = $request->validated();
+        // dd($fields);
 
-        if (isset($fields['image'])) {
-            if ($movie->existImage) {
+        if (isset($fields['poster'])) {
+            if ($movie->posterExist) {
                 Storage::disk('public')->delete($movie->poster);
             }
 
-            $fields['poster'] = $request->image->storePublicly('movies', 'public');
+            $fields['poster'] = $request->file('poster')
+                ->storePublicly('movies', 'public');
         }
 
         if (count($fields) > 0) {
@@ -114,19 +142,25 @@ class MovieController extends Controller
         }
 
         return redirect()
+            // ->back()
             ->route('movies.index')
             ->with('success', 'Movie updated successfully');
     }
 
     /**
-     * Publish movie.
+     * Set movie publicity [true|false].
      */
-    public function publish(PublishMovieRequest $request, Movie $movie): RedirectResponse
+    public function publicity(PublicityMovieRequest $request, Movie $movie): RedirectResponse
     {
         $movie->update($request->validated());
+        $msg = $request->published 
+            ? 'Movie published successfully'
+            : 'Movie unpublished successfully';
 
-        return redirect()->route('movies.index')
-            ->with('success', 'Movie published successfully');
+        return redirect()
+            ->back()
+            // ->route('movies.index')
+            ->with('success', $msg);
     }
 
     /**
@@ -142,7 +176,9 @@ class MovieController extends Controller
 
         $movie->delete();
 
-        return redirect()->route('movies.index')
+        return redirect()
+            // ->route('movies.index')
+            ->back()
             ->with('success', 'Movie deleted successfully');
     }
 }
