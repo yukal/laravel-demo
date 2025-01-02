@@ -1,4 +1,6 @@
 {
+    "name": "laravel-demo",
+    "author": "Alex Yu",
     "private": true,
     "type": "module",
     "scripts": {
