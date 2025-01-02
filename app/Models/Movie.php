@@ -40,8 +40,8 @@ class Movie extends Model
      */
     public function genres(): BelongsToMany
     {
-        return $this->belongsToMany(Genre::class, 'genre_movie', 'movie_id', 'genre_id')
-            ->using(GenreMovie::class);
+        return $this->belongsToMany(Genre::class, 'genre_movie', 'movie_id', 'genre_id');
+            // ->using(GenreMovie::class);
             // ->withPivot(['genre_id', 'movie_id']);
     }
 
