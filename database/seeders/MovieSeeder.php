@@ -130,7 +130,7 @@ class MovieSeeder extends Seeder
         ];
 
         // the next ID number
-        $sequence = count($rows) + 1;
+        $sequence = end($rows)['id'] + 1;
 
         DB::table('movies')->insert($rows);
         DB::update(

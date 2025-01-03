@@ -35,7 +35,7 @@ class GenreSeeder extends Seeder
         ];
 
         // the next ID number
-        $sequence = count($rows) + 1;
+        $sequence = end($rows)['id'] + 1;
 
         DB::table('genres')->insert($rows);
         DB::update(
