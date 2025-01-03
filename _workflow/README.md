@@ -51,6 +51,7 @@ php artisan make:controller Api/V1/GenreController --api --model Genre
 php artisan make:controller Api/V1/MovieController --api --model Movie
 
 npm install
+npm run build
 ```
 
 ## Additional Info
