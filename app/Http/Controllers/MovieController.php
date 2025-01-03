@@ -89,7 +89,7 @@ class MovieController extends Controller
         $movie->genres()->sync($fields['genres']);
 
         return redirect()->route('movies.index')
-            ->with('success', 'Movie created successfully.');
+            ->with('success', 'Movie created successfully');
     }
 
     /**

@@ -46,7 +46,7 @@ class GenreController extends Controller
         Genre::create($request->validated());
 
         return redirect()->route('genres.index')
-            ->with('success', 'Genre created successfully.');
+            ->with('success', 'Genre created successfully');
     }
 
     /**
