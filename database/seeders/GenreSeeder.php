@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Genre;
+use App\Models\Movie;
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use DB;
@@ -15,31 +18,23 @@ class GenreSeeder extends Seeder
     {
         // https://boords.com/blog/100-movie-genres-the-definitive-list-with-examples
 
-        $rows = [
-            ['id' => 1, 'name' => 'Action'],
-            ['id' => 2, 'name' => 'Thriller'],
-            ['id' => 3, 'name' => 'Drama'],
-            ['id' => 4, 'name' => 'Comedy'],
-            ['id' => 5, 'name' => 'Romance'],
-            ['id' => 6, 'name' => 'Horror'],
-            ['id' => 7, 'name' => 'Western'],
-            ['id' => 8, 'name' => 'Crime'],
-            ['id' => 9, 'name' => 'Fantasy'],
-            ['id' => 10, 'name' => 'Mystery'],
-            ['id' => 11, 'name' => 'Historical'],
-            ['id' => 12, 'name' => 'Musical'],
-            ['id' => 13, 'name' => 'Animation'],
-            ['id' => 14, 'name' => 'Documentary'],
-            ['id' => 15, 'name' => 'Adventure'],
-            ['id' => 16, 'name' => 'Science'],
-        ];
-
-        // the next ID number
-        $sequence = end($rows)['id'] + 1;
-
-        DB::table('genres')->insert($rows);
-        DB::update(
-            'ALTER SEQUENCE IF EXISTS public.genres_id_seq NO MINVALUE RESTART '.$sequence.' CACHE '.$sequence
-        );
+        Genre::factory()->createMany([
+            ['name' => 'Action'],
+            ['name' => 'Thriller'],
+            ['name' => 'Drama'],
+            ['name' => 'Comedy'],
+            ['name' => 'Romance'],
+            ['name' => 'Horror'],
+            ['name' => 'Western'],
+            ['name' => 'Crime'],
+            ['name' => 'Fantasy'],
+            // ['name' => 'Mystery'],
+            // ['name' => 'Historical'],
+            // ['name' => 'Musical'],
+            // ['name' => 'Animation'],
+            // ['name' => 'Documentary'],
+            // ['name' => 'Adventure'],
+            // ['name' => 'Science'],
+        ]);
     }
 }
