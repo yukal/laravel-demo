@@ -1,0 +1,70 @@
+name: Compliance
+
+on: [workflow_dispatch]
+
+jobs:
+  laravel-tests:
+    name: Compliance
+    runs-on: ubuntu-latest
+
+    # Docs: https://docs.github.com/en/actions/using-containerized-services
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: laravel_tester
+          POSTGRES_PASSWORD: laravel_tester
+          POSTGRES_DB: laravel_testing
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
+
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Postgres Connection
+        env:
+          DB_CONNECTION: postgresql://laravel_tester:laravel_tester@127.0.0.1:5432/laravel_testing
+        run: |
+          psql -d $DB_CONNECTION -c 'SELECT 1;'
+          if [ $? -ne 0 ]; then
+            echo "Error connecting to PostgreSQL"
+            exit 1
+          fi
+
+      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+        with:
+          php-version: "8.4"
+
+      - name: Install Dependencies
+        run: |
+          composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+          npm install && npm run build
+
+      - name: Init Infrastructure
+        run: |
+          chmod -R 777 storage bootstrap/cache
+          php artisan storage:link
+          php artisan config:clear
+          php artisan key:generate --env=testing
+
+      - name: Migrate Data
+        run: php artisan migrate --env=testing
+        # run: php artisan migrate --database pgsql_testing
+
+      - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
+        run: php artisan test --env=testing --filter BlankTest
