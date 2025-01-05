@@ -101,6 +101,8 @@ class MovieTest extends TestCase
         $this->seed(TestSeeder::class);
 
         $movie = Movie::first();
+        $genres = Genre::all()->toArray();
+
         $response = $this->get(route('movies.edit', $movie->id));
 
         $response
@@ -108,12 +110,9 @@ class MovieTest extends TestCase
             ->assertViewHas('page.component', 'Movies/Edit')
             ->assertViewHas('page.props.movie', [
                 ...$movie->toArray(),
-                'genresIDs' => [1],
+                'genresIDs' => [$genres[0]['id']],
             ])
-            ->assertViewHas('page.props.genres', [
-                ['id' => 1, 'name' => 'Action'],
-                ['id' => 2, 'name' => 'Comedy'],
-            ])
+            ->assertViewHas('page.props.genres', $genres)
             ->assertViewHas(
                 'page.props.statuses',
                 Movie::getStatuses()
