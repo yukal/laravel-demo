@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# How to run tests
+
+php artisan config:clear
+
+# Run all tests
+php artisan test --env=testing
+
+# Run specific tests
+# php artisan test --env=testing --filter GenreTest
+# php artisan test --env=testing --filter MovieTest
