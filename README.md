@@ -9,7 +9,7 @@ See the [task description](_workflow/task-en.md), and the [workflow](_workflow).
 
 ## Init
 
-Before start, please init the database first and set all the variables with `DB_` suffix, at [.env.example](.env.example)!
+Before the start, please init the database first and set all the variables with `DB_` suffix, at [.env](.env) and [.env.testing](.env.testing) for tests respectively!
 
 ```bash
 # Install dependencies
@@ -29,7 +29,4 @@ init.cmd
 
 # To serve in dev mode type
 composer run dev
-
-# or
-php artisan serve
 ```
