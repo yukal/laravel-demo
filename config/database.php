@@ -104,7 +104,7 @@ return [
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'laravel_testing'),
             'username' => env('DB_USERNAME', 'laravel_tester'),
-            'password' => env('DB_PASSWORD', 'u24hvWfTbKNXfNKfj6cY3t26'),
+            'password' => env('DB_PASSWORD', 'laravel_tester'),
             'charset' => env('DB_CHARSET', 'utf8'),
             'prefix' => '',
             'prefix_indexes' => true,
