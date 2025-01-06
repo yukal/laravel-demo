@@ -4,12 +4,12 @@ namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
-class ExampleTest extends TestCase
+class BlankTest extends TestCase
 {
     /**
-     * A basic test example.
+     * A blank test for CI compliance.
      */
-    public function test_that_true_is_true(): void
+    public function test_ci(): void
     {
         $this->assertTrue(true);
     }
