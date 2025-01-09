@@ -1,0 +1,81 @@
+#!/usr/bin/env php
+<?php // phpinfo();
+
+// Ctype       PHP Extension   (default)
+// cURL        PHP Extension   (integrated)
+// DOM         PHP Extension   (default)
+// Fileinfo    PHP Extension   (default)
+// Filter      PHP Extension   (default)
+// Hash        PHP Extension   (default)
+// Mbstring    PHP Extension   (integrated)
+// OpenSSL     PHP Extension   (integrated)
+// PCRE        PHP Extension   (default)
+// PDO         PHP Extension   (default)
+// Session     PHP Extension   (default)
+// Tokenizer   PHP Extension   (default)
+// XML         PHP Extension   (default)
+
+$extensions = [
+    /**
+     * Extensions required by Laravel v11
+     * @see https://laravel.com/docs/11.x/deployment#server-requirements
+     */
+
+    'ctype' => 1,
+    'curl' => 1,
+    'dom' => 1,
+    'fileinfo' => 1,
+    'filter' => 1,
+    'hash' => 1,
+    'mbstring' => 1,
+    'openssl' => 1,
+    'pcre' => 1,
+    'pdo' => 1,
+    'session' => 1,
+    'tokenizer' => 1,
+    'xml' => 1,
+
+    /**
+     * Additional Extensions required by application
+     */
+
+    'pgsql' => 2,
+    'pdo_pgsql' => 2,
+    'gd' => 2,
+];
+
+echo "\nExtensions Status\n\n";
+
+foreach (get_loaded_extensions() as &$extension) {
+    // printf("  %-14s %s\n", $extension, extension_loaded($extension) == 1 ? '[ loaded ]' : '[ ? ]');
+
+    $required = '';
+
+    if (isset($extensions[$extension])) {
+        switch($extensions[$extension]) {
+            case 1:
+                $required = '[ laravel ]';
+                break;
+
+            case 2:
+                $required = '[ app ]';
+                break;
+
+            default:
+                $required = '';
+            }
+
+        // $required = $extensions[$extension] == 1 ? '[ required ]' : '';
+        // $additional = $extensions[$extension] == 2 ? '[ additional ]' : '';
+    }
+
+    printf("  %-14s %-10s %-12s\n", $extension,
+        extension_loaded($extension) == 1 ? '[ loaded ]' : '[ ? ]',
+        $required,
+    );
+}
+
+echo "\n *loaded  - compiled and loaded modules";
+echo "\n *laravel - extensions required by Laravel";
+echo "\n *app     - extensions required by Application";
+echo "\n\n";

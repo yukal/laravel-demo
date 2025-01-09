@@ -1,0 +1,72 @@
+version: '3.9'
+
+services:
+  php:
+    container_name: laravel_php
+    image: laravel-demo-php
+    build: 
+      context: .
+      dockerfile: ./.docker/php/Dockerfile
+    user:
+      "1000:1000"
+    volumes:
+      - ./.docker/php/php-development.ini:/usr/local/etc/php/php.ini
+      - application:/var/www/html:rw
+    links:
+      - postgres
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - app-network
+
+  postgres:
+    container_name: laravel_db
+    image: postgres:alpine
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_DB: laravel
+      POSTGRES_USER: laravel
+      POSTGRES_PASSWORD: G9nyvudXVc6yf39HhJmVxNpoVnm8d3jb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  redis:
+    container_name: laravel_redis
+    image: redis:alpine
+    networks:
+      - app-network
+
+  nginx:
+    container_name: laravel_nginx
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    volumes:
+      - ./.docker/nginx.conf:/etc/nginx/conf.d/default.conf
+      - application:/var/www/html:ro
+    links:
+      - php
+    depends_on:
+      - php
+      - postgres
+      - redis
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+  application:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "${PWD}"
+
+networks:
+  app-network:
+    driver: bridge
