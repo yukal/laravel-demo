@@ -1,0 +1,141 @@
+v1.2.3 - 2025-01-06
+
+  New Features
+    - core: provide image helper
+
+  Builds
+    - improve scripts
+
+  Fixes
+    - model: fix many-to-many relations
+
+  Refactors
+    - remove example tests
+    - update flash messages
+    - improve seeders
+    - migration: set sequences
+    - models: add genre factory
+    - models: add movie factory
+    - seeders: use factory
+
+  Tests
+    - genres
+    - movies
+
+  Chores
+    - setup environment
+    - rename project
+
+  Docs
+    - update readme
+
+  Continuous Integration
+    - github actions: provide compliance
+    - github actions: provide tests
+
+
+.................................................................
+
+v1.1.2 - 2024-12-13
+
+
+New Features
+  - vue: implement preview page
+
+Builds
+  - update initialization script
+
+Fixes
+  - template: visibility of the top menu
+  - migration: reset sequences
+
+Refactors
+  - api: update routes and publishing visibility
+  - vue: template optimization
+  - vue: provide flex-container
+  - vue: use icon component
+  - request: update filters
+  - use inertia
+  - movie: improve publicity
+  - update models
+  - remove ancient templates
+  - core: use breeze, sanctum, ziggy, vue, vite, inertia, tailwind, postcss
+
+Chores
+  - workflow: update screenshots
+  - theme: use soft colors
+  - add missed styles
+  - api: provide helpers
+  - provide vue pages:
+    - general: Header, Footer
+    - movie: Index, Create, Edit, Show
+    - genre: Index, Create, Edit, Show
+  - provide vue components:
+    - Breadcrumbs, Btn, BtnBack, BtnCheckList, Card, NavBar, Table
+    - UseIcon
+
+Docs
+  - update readme
+
+
+
+.................................................................
+
+v0.14.3 – 2024-12-08
+
+
+New Features
+  - pagination
+  - movie: set and show published/unpublished
+  - update image
+  - image placeholder
+  - upload images
+  - movie status
+  - add api controllers
+  - add routes
+  - add views
+  - add controllers
+  - add requests rules
+  - add models
+  - add seeders
+  - add migrations
+
+Builds
+  - add bash and cmd scripts
+  - core: update dependencies
+
+Fixes
+  - api: route names
+  - api: add missed vars
+  - remove records with an empty image
+
+Refactors
+  - improve routes
+  - improve models
+  - model: rename fields
+  - model: improve pivot model
+  - migration: possibility to start seeding with "--seed" parameter
+  - genre: improve model
+  - genre: extend seeder values
+  - movie: improve pulishing
+  - movie: improve uploading
+  - movie: improve accessors
+  - movie: improve update method
+  - movie: improve destroy method
+  - improve request rules
+  - rename models due to Laravel conventions
+  - improve placeholder image
+  - improve migrations
+  - api: show only published movies
+  - api: move to v1 namespace
+  - remove unnecessary code
+  - template: update views
+  - paginator: use bootstrap
+
+Chores
+  - core: add engine
+  - add posters
+  - add workflow
+
+Docs
+  - update readme
