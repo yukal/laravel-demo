@@ -79,5 +79,6 @@ jobs:
         run: php artisan migrate --env=testing
 
       - name: Execute tests
-        run: php artisan test --env=testing
+        run: XDEBUG_MODE=coverage php artisan test --env=testing --coverage
+        # run: php artisan test --env=testing
         # run: vendor/bin/phpunit --coverage-text
