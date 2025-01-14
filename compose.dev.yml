@@ -10,7 +10,6 @@ services:
     user:
       "${USER_ID}:${USER_ID}"
     volumes:
-      - ./.docker/php/php-development.ini:/usr/local/etc/php/php.ini
       - application:/var/www/html:rw
     depends_on:
       - postgres
