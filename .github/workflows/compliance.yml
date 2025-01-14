@@ -65,5 +65,5 @@ jobs:
       - name: Migrate Data
         run: php artisan migrate --env=testing
 
-      - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
+      - name: Execute tests
         run: php artisan test --env=testing --filter BlankTest
